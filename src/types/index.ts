@@ -19,6 +19,7 @@ export interface Project {
   screenshots?: string[];
   /** 実在する URL のみ設定する。不明な場合はキー自体を書かない */
   appStoreUrl?: string;
+  chromeWebStoreUrl?: string;
   websiteUrl?: string;
   supportUrl?: string;
   githubUrl?: string;

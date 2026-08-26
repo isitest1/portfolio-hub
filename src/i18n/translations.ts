@@ -12,6 +12,7 @@ export interface UI {
   updated: string;
   links: {
     appStore: string;
+    chromeWebStore: string;
     website: string;
     support: string;
     github: string;
@@ -52,6 +53,7 @@ export const ui: Record<Lang, UI> = {
     updated: '最終更新 2026.08',
     links: {
       appStore: 'App Store',
+      chromeWebStore: 'Chrome ウェブストア',
       website: 'Website',
       support: 'サポート',
       github: 'GitHub',
@@ -90,6 +92,7 @@ export const ui: Record<Lang, UI> = {
     updated: 'Updated 2026.08',
     links: {
       appStore: 'App Store',
+      chromeWebStore: 'Chrome Web Store',
       website: 'Website',
       support: 'Support',
       github: 'GitHub',

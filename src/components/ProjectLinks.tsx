@@ -8,6 +8,7 @@ export default function ProjectLinks({ project, primaryOnly = false }: { project
   const items: { label: string; href?: string; to?: string }[] = [];
 
   if (project.appStoreUrl) items.push({ label: t.links.appStore, href: project.appStoreUrl });
+  if (project.chromeWebStoreUrl) items.push({ label: t.links.chromeWebStore, href: project.chromeWebStoreUrl });
   if (project.websiteUrl) items.push({ label: t.links.website, href: project.websiteUrl });
   if (project.hasDetailPage) items.push({ label: t.links.detail, to: path('projects/' + project.id) });
   if (project.supportUrl) items.push({ label: t.links.support, href: project.supportUrl });
