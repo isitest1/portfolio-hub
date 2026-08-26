@@ -16,7 +16,7 @@ export default function Featured() {
       <div className="featured-grid">
         {items.map((p) => (
           <article key={p.id} className="fcard">
-            <Shot project={p} alt={p.name[lang]} height={300} />
+            <Shot project={p} lang={lang} alt={p.name[lang]} height={300} />
             <div className="fcard__body">
               <span className="fcard__cat">{p.category}</span>
               <h3 className="fcard__name">{p.name[lang]}</h3>

@@ -17,7 +17,10 @@ export interface Project {
   platforms?: string[];
   technologies?: string[];
   icon?: string;
+  /** 言語を問わず同じ画像でよい場合はこちら */
   screenshots?: string[];
+  /** ja/en で異なるスクリーンショットを使う場合はこちら（設定時は screenshots より優先） */
+  screenshotsByLang?: { ja: string[]; en: string[] };
   /** 実在する URL のみ設定する。不明な場合はキー自体を書かない */
   appStoreUrl?: string;
   chromeWebStoreUrl?: string;

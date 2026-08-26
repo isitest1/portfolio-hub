@@ -24,7 +24,10 @@ export default function ProjectDetail() {
         name: project.name[lang],
         description: (project.longDescription ?? project.description)[lang],
         url: project.appStoreUrl ?? project.websiteUrl ?? absoluteUrl(path('projects/' + project.id)),
-        image: project.screenshots?.[0] ? absoluteUrl(project.screenshots[0]) : undefined,
+        image: (() => {
+          const shot = project.screenshotsByLang?.[lang]?.[0] ?? project.screenshots?.[0];
+          return shot ? absoluteUrl(shot) : undefined;
+        })(),
         applicationCategory: project.category === 'iOS' ? 'MobileApplication' : 'WebApplication',
         operatingSystem: project.platforms?.join(', '),
         author: { '@type': 'Person', name: 'Kohei Ishikawa' },
@@ -96,7 +99,7 @@ export default function ProjectDetail() {
 
         <section className="section">
           <h2 className="eyebrow">{t.detail.screenshots}</h2>
-          <Shot project={project} alt={project.name[lang]} height={560} fit="contain" />
+          <Shot project={project} lang={lang} alt={project.name[lang]} height={560} fit="contain" />
         </section>
       </main>
       <Footer />

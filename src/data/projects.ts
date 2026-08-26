@@ -69,7 +69,10 @@ export const projects: Project[] = [
     ],
     appStoreUrl: 'https://apps.apple.com/jp/app/id6790803132',
     supportUrl: 'https://isitest1.github.io/workoutquest-site/',
-    screenshots: ['/projects/workoutquest-1.png'],
+    screenshotsByLang: {
+      ja: ['/projects/workoutquest-ja-1.png'],
+      en: ['/projects/workoutquest-en-1.png'],
+    },
   },
   {
     id: 'furusato-cospa',
