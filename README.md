@@ -50,8 +50,12 @@ public/         favicon, robots.txt, 404.html(SPA fallback)
 
 言語切替は現在のパスを保ったまま `/ja/projects/x` ↔ `/en/projects/x` を入れ替えます。
 
+## プロジェクトデータの出典
+
+`src/data/projects.ts` は isitest1 の GitHub リポジトリ（README / CLAUDE.md / 公開中のサポートサイト）を実際に調査して作成しています。App Store の URL は存在が確認できたものだけ設定しており、確認できないものは `appStoreUrl` を書かず `status: 'coming-soon'` にしています。
+
 ## TODO
 
-- `src/data/projects.ts` の URL（App Store / Website / Support / GitHub）を実際の値に差し替える
-- `public/projects/` にアイコンとスクリーンショットを追加
-- OG 画像（`public/og.png`）と `index.html` の `og:image` / `og:url`
+- 各アプリが実際に App Store で公開されたら `appStoreUrl` を追加する
+- `public/projects/` に残りのアプリのスクリーンショットを追加（RigSketch, NameCue, RecordQuick, UnitPriceScanner, WorkoutQuest, tube-player-for-safari, web-monitor-rss, text-compare）
+- OG 画像（`public/og.png`）と `index.html` の `og:image`
