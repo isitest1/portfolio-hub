@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting…</title>
+    <script>
+      // GitHub Pages の SPA フォールバック: パスを ?/ に退避して index.html に戻す
+      var segments = 1; // base が '/repo-name/' の場合は 1、ユーザーページ('/')なら 0
+      var l = window.location;
+      var path = l.pathname.split('/').slice(1 + segments).join('/');
+      l.replace(
+        l.origin +
+          l.pathname.split('/').slice(0, 1 + segments).join('/') +
+          '/?/' +
+          path.replace(/&/g, '~and~') +
+          (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+          l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
