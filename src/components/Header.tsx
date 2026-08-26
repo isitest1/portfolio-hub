@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <header className="site-header">
       <Link to={path()} className="wordmark">
-        PORTFOLIO HUB
+        KOHEI ISHIKAWA <span className="wordmark__sep">/</span> PORTFOLIO HUB
       </Link>
       <nav className="site-nav" aria-label={t.nav.products}>
         <a href="#products">{t.nav.products}</a>

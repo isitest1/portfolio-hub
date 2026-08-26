@@ -8,7 +8,8 @@ export type Status = 'active' | 'coming-soon' | 'archived';
 
 export interface Project {
   id: string;
-  name: string; // 製品名は翻訳しない
+  /** 英語名が別途存在しない製品は、ja/en に同じ文字列を入れる（製品名を勝手に翻訳しない） */
+  name: LocalizedText;
   category: Category;
   description: LocalizedText;
   longDescription?: LocalizedText;

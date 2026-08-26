@@ -17,12 +17,15 @@ export default function ProjectLinks({ project, primaryOnly = false }: { project
 
   if (items.length === 0) return null;
 
-  // カード上（primaryOnly）は、主要リンク1件 + サポートリンク（あれば）を常に見せる
+  // カード上（primaryOnly）は、主要リンク + Chrome ウェブストア + サポート（あれば）を常に見せる
   let list = items;
   if (primaryOnly) {
-    const support = items.find((i) => i.label === t.links.support);
+    const findByLabel = (label: string) => items.find((i) => i.label === label);
     const primary = items.find((i) => i.label !== t.links.support) ?? items[0];
-    list = support && support !== primary ? [primary, support] : [primary];
+    const extras = [findByLabel(t.links.chromeWebStore), findByLabel(t.links.support)].filter(
+      (i): i is { label: string; href?: string; to?: string } => !!i && i !== primary
+    );
+    list = [primary, ...extras];
   }
 
   return (

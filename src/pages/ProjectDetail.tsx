@@ -13,7 +13,7 @@ export default function ProjectDetail() {
   const project = projects.find((p) => p.id === id);
 
   useSeo(
-    project ? `${project.name} — Portfolio Hub` : t.notFound.title,
+    project ? `${project.name[lang]} — Kohei Ishikawa Portfolio Hub` : t.notFound.title,
     project ? project.description[lang] : t.notFound.body
   );
 
@@ -21,7 +21,7 @@ export default function ProjectDetail() {
     ? JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
-        name: project.name,
+        name: project.name[lang],
         description: (project.longDescription ?? project.description)[lang],
         url: project.appStoreUrl ?? project.websiteUrl ?? absoluteUrl(path('projects/' + project.id)),
         image: project.screenshots?.[0] ? absoluteUrl(project.screenshots[0]) : undefined,
@@ -57,7 +57,7 @@ export default function ProjectDetail() {
             <span aria-hidden="true">←</span> {t.links.back}
           </Link>
           <span className="fcard__cat">{project.category}</span>
-          <h1 className="detail__name">{project.name}</h1>
+          <h1 className="detail__name">{project.name[lang]}</h1>
           <p className="detail__lead">{project.description[lang]}</p>
           <ProjectLinks project={project} />
         </section>
@@ -96,7 +96,7 @@ export default function ProjectDetail() {
 
         <section className="section">
           <h2 className="eyebrow">{t.detail.screenshots}</h2>
-          <Shot project={project} height={560} fit="contain" />
+          <Shot project={project} alt={project.name[lang]} height={560} fit="contain" />
         </section>
       </main>
       <Footer />

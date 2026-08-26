@@ -37,7 +37,7 @@ export interface UI {
 export const ui: Record<Lang, UI> = {
   ja: {
     meta: {
-      title: 'Portfolio Hub — つくったアプリと、その使いどころ',
+      title: 'Kohei Ishikawa Portfolio Hub — つくったアプリと、その使いどころ',
       description:
         'iPhoneアプリ、Webアプリ、小さなツールをつくっています。それぞれのプロダクトが何をするもので、どこから使えるのかをまとめた場所です。',
     },
@@ -76,7 +76,7 @@ export const ui: Record<Lang, UI> = {
   },
   en: {
     meta: {
-      title: 'Portfolio Hub — Apps, Websites & Tools',
+      title: 'Kohei Ishikawa Portfolio Hub — Apps, Websites & Tools',
       description:
         'iPhone apps, web apps and small utilities I build. What each product does, and where to start using it.',
     },

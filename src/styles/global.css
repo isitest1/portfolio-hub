@@ -50,7 +50,8 @@ ul { margin: 0; padding: 0; list-style: none; }
   padding: 18px var(--pad); border-bottom: 2px solid var(--ink);
   position: sticky; top: 0; background: var(--paper); z-index: 10;
 }
-.wordmark { font-family: var(--sans); font-size: 14px; font-weight: 700; letter-spacing: 0.16em; }
+.wordmark { font-family: var(--sans); font-size: 13px; font-weight: 700; letter-spacing: 0.1em; white-space: nowrap; }
+.wordmark__sep { color: var(--ink-3); font-weight: 400; margin: 0 1px; }
 .site-nav { display: flex; align-items: center; gap: clamp(14px, 2.4vw, 28px); font-family: var(--sans);
   font-size: 12.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
 .lang { display: flex; flex-shrink: 0; }
@@ -149,6 +150,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 @media (max-width: 620px) {
   .site-header { flex-wrap: wrap; row-gap: 10px; position: static; }
+  .wordmark { white-space: normal; font-size: 11.5px; line-height: 1.4; max-width: 100%; }
   .site-nav { width: 100%; justify-content: space-between; gap: 12px; font-size: 11.5px; }
   .hero { padding-top: 28px; }
   .hero__headline { font-size: clamp(38px, 13vw, 56px); }

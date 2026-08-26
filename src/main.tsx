@@ -4,10 +4,15 @@ import App from './App';
 import './styles/global.css';
 
 // GitHub Pages 404.html からの ?/path 復元
-const redirect = new URLSearchParams(window.location.search).get('/');
-if (redirect !== null) {
-  const restored = redirect.replace(/~and~/g, '&');
-  window.history.replaceState(null, '', import.meta.env.BASE_URL + restored + window.location.hash);
+// 404.html は "?/ja/projects/x&foo=bar" のようなクエリを作る（"/" の後は "=" を含まない）ため、
+// URLSearchParams ではキーが "/ja/projects/x" になってしまい取得できない。文字列操作で復元する。
+if (window.location.search[1] === '/') {
+  const decoded = window.location.search
+    .slice(1)
+    .split('&')
+    .map((s) => s.replace(/~and~/g, '&'))
+    .join('?');
+  window.history.replaceState(null, '', window.location.pathname.slice(0, -1) + decoded + window.location.hash);
 }
 
 createRoot(document.getElementById('root')!).render(

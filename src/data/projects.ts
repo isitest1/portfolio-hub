@@ -13,11 +13,15 @@ import type { Project } from '../types';
  * App Store Connect API（isitest1のApp Store Connectアカウント）で実際のapp-store-state
  * を確認して作成（2026-08-26）。appStoreState: READY_FOR_SALE のものだけ appStoreUrl /
  * status: 'active' を設定しています。未公開のURLは記載していません。
+ *
+ * スクリーンショットは、実機で撮影された素材（App Store提出用アセットや公開中のサポートサイト）
+ * または実際に稼働しているサイトのキャプチャのみを使用しています。素材が存在しないプロジェクトは
+ * screenshots を設定していません（プレースホルダ表示のまま）。
  */
 export const projects: Project[] = [
   {
     id: 'needsoon',
-    name: 'NeedSoon（ないかも）',
+    name: { ja: 'NeedSoon（ないかも）', en: 'NeedSoon' },
     category: 'iOS',
     featured: true,
     status: 'active',
@@ -43,7 +47,7 @@ export const projects: Project[] = [
   },
   {
     id: 'workoutquest',
-    name: 'WorkoutQuest',
+    name: { ja: 'WorkoutQuest', en: 'WorkoutQuest' },
     category: 'iOS',
     featured: true,
     status: 'active',
@@ -65,10 +69,11 @@ export const projects: Project[] = [
     ],
     appStoreUrl: 'https://apps.apple.com/jp/app/id6790803132',
     supportUrl: 'https://isitest1.github.io/workoutquest-site/',
+    // 実機/App Store提出用のスクリーンショット素材が見つかっていません
   },
   {
     id: 'furusato-cospa',
-    name: 'ふるさとコスパ',
+    name: { ja: 'ふるさとコスパ', en: 'Furusato Cospa' },
     category: 'Web',
     featured: true,
     status: 'active',
@@ -89,10 +94,11 @@ export const projects: Project[] = [
     ],
     websiteUrl: 'https://furusato-cospa.kouhei1.workers.dev/',
     chromeWebStoreUrl: 'https://chromewebstore.google.com/detail/mopedkejokejahoekdkfgccgiaicipld',
+    screenshots: ['/projects/furusato-cospa-1.png'],
   },
   {
     id: 'textsnap',
-    name: 'TextSnap',
+    name: { ja: 'TextSnap', en: 'TextSnap' },
     category: 'Tool',
     featured: true,
     status: 'active',
@@ -114,10 +120,11 @@ export const projects: Project[] = [
     ],
     websiteUrl: 'https://isitest1.github.io/TextSnap/',
     githubUrl: 'https://github.com/isitest1/TextSnap',
+    screenshots: ['/projects/textsnap-1.png'],
   },
   {
     id: 'unit-price-scanner',
-    name: 'UnitPriceScanner',
+    name: { ja: 'UnitPriceScanner', en: 'UnitPriceScanner' },
     category: 'iOS',
     status: 'active',
     technologies: ['Swift', 'SwiftUI', 'Vision', 'AVFoundation'],
@@ -138,11 +145,13 @@ export const projects: Project[] = [
     ],
     appStoreUrl: 'https://apps.apple.com/jp/app/id6789856620',
     supportUrl: 'https://isitest1.github.io/unitpricescanner-support/',
+    // 実機/App Store提出用のスクリーンショット素材が見つかっていません
   },
   {
     id: 'ensemble-stage',
-    name: 'EnsembleStage',
+    name: { ja: 'EnsembleStage', en: 'EnsembleStage' },
     category: 'iOS',
+    featured: true,
     status: 'active',
     technologies: ['Swift', 'SwiftUI', 'SwiftData'],
     platforms: ['iPhone', 'iPad'],
@@ -166,7 +175,7 @@ export const projects: Project[] = [
   },
   {
     id: 'netagicho',
-    name: 'ネタ帳',
+    name: { ja: 'ネタ帳', en: 'Netagicho' },
     category: 'iOS',
     status: 'active',
     technologies: ['Swift', 'SwiftUI'],
@@ -191,7 +200,7 @@ export const projects: Project[] = [
   },
   {
     id: 'photoslim',
-    name: 'スッキリGB',
+    name: { ja: 'スッキリGB', en: 'PhotoSlim' },
     category: 'iOS',
     status: 'coming-soon',
     technologies: ['Swift', 'SwiftUI'],
@@ -210,7 +219,7 @@ export const projects: Project[] = [
   },
   {
     id: 'namecue',
-    name: 'NameCue',
+    name: { ja: 'NameCue', en: 'NameCue' },
     category: 'iOS',
     status: 'active',
     technologies: ['Swift', 'SwiftUI'],
@@ -231,10 +240,11 @@ export const projects: Project[] = [
     ],
     appStoreUrl: 'https://apps.apple.com/jp/app/id6791782983',
     supportUrl: 'https://isitest1.github.io/NameCue/support.html',
+    // 実機/App Store提出用のスクリーンショット素材が見つかっていません
   },
   {
     id: 'record-quick',
-    name: 'RecordQuick',
+    name: { ja: 'RecordQuick', en: 'RecordQuick' },
     category: 'iOS',
     status: 'coming-soon',
     technologies: ['Swift', 'SwiftUI'],
@@ -244,10 +254,11 @@ export const projects: Project[] = [
       en: 'Start recording in one tap and keep going in the background, with speech-to-text in roughly 30 languages.',
     },
     supportUrl: 'https://isitest1.github.io/RecordQuick-site/',
+    // 実機/App Store提出用のスクリーンショット素材が見つかっていません
   },
   {
     id: 'rig-sketch',
-    name: 'RigSketch',
+    name: { ja: 'RigSketch', en: 'RigSketch' },
     category: 'iOS',
     status: 'coming-soon',
     technologies: ['Swift', 'SwiftUI'],
@@ -256,10 +267,11 @@ export const projects: Project[] = [
       ja: '竿・リール・ライン・ウキ・オモリなどのパーツを組み合わせて、釣りの仕掛け図を作れるアプリ。',
       en: 'Build a fishing rig diagram by picking and connecting parts — rod, reel, line, float, sinker, and more.',
     },
+    // 実機/App Store提出用のスクリーンショット素材が見つかっていません
   },
   {
     id: 'tube-player-for-safari',
-    name: 'Tube Player for Safari',
+    name: { ja: 'Tube Player for Safari', en: 'Tube Player for Safari' },
     category: 'Tool',
     status: 'coming-soon',
     technologies: ['Swift', 'JavaScript'],
@@ -269,10 +281,11 @@ export const projects: Project[] = [
       en: 'A Safari Web Extension that swaps YouTube’s player for native HTML5 — AirPlay and Picture-in-Picture, zero network calls.',
     },
     supportUrl: 'https://isitest1.github.io/tube-player-for-safari-site/',
+    screenshots: ['/projects/tube-player-1.png'],
   },
   {
     id: 'web-monitor-rss',
-    name: 'Web Monitor RSS',
+    name: { ja: 'Web Monitor RSS', en: 'Web Monitor RSS' },
     category: 'Tool',
     status: 'active',
     technologies: ['TypeScript', 'Cloudflare Workers', 'GitHub Actions'],
@@ -282,10 +295,11 @@ export const projects: Project[] = [
       en: 'Point-and-click to select part of a webpage, then get a private RSS feed only when it changes.',
     },
     githubUrl: 'https://github.com/isitest1/web-monitor-rss',
+    // 個人利用専用ツールで公開URLが無いため、スクリーンショットを用意できません
   },
   {
     id: 'text-compare',
-    name: 'Text Compare',
+    name: { ja: 'Text Compare', en: 'Text Compare' },
     category: 'Tool',
     status: 'active',
     technologies: ['JavaScript'],
@@ -296,10 +310,11 @@ export const projects: Project[] = [
     },
     websiteUrl: 'https://isitest1.github.io/text-compare/',
     githubUrl: 'https://github.com/isitest1/text-compare',
+    screenshots: ['/projects/text-compare-1.png'],
   },
   {
     id: 'portfolio-hub',
-    name: 'Portfolio Hub',
+    name: { ja: 'Portfolio Hub', en: 'Portfolio Hub' },
     category: 'Website',
     status: 'active',
     technologies: ['React', 'TypeScript', 'Vite', 'GitHub Pages'],
@@ -309,6 +324,7 @@ export const projects: Project[] = [
       en: 'This site — the entry point to every product and its support page.',
     },
     githubUrl: 'https://github.com/isitest1/portfolio-hub',
+    screenshots: ['/projects/portfolio-hub-1.png'],
   },
 ];
 

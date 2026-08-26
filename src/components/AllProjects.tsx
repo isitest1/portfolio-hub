@@ -20,7 +20,7 @@ export default function AllProjects() {
                 {items.map((p) => (
                   <li key={p.id} className="row">
                     <div className="row__top">
-                      <span className="row__name">{p.name}</span>
+                      <span className="row__name">{p.name[lang]}</span>
                       <span className="row__status">{t.status[p.status ?? 'active']}</span>
                     </div>
                     <p className="row__desc">{p.description[lang]}</p>
