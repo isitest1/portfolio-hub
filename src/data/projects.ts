@@ -9,8 +9,10 @@ import type { Project } from '../types';
  *  5. 必要なら featured: true / hasDetailPage: true
  * コンポーネント側の修正は不要。
  *
- * 出典: 各リポジトリの README / CLAUDE.md / 公開中のサポートサイトを調査して作成（2026-08-26）。
- * 未公開のURLは記載していません。App Store配信の有無は確認が取れたものだけ status: 'active' にしています。
+ * 出典: 各リポジトリの README / CLAUDE.md / 公開中のサポートサイトに加え、
+ * App Store Connect API（isitest1のApp Store Connectアカウント）で実際のapp-store-state
+ * を確認して作成（2026-08-26）。appStoreState: READY_FOR_SALE のものだけ appStoreUrl /
+ * status: 'active' を設定しています。未公開のURLは記載していません。
  */
 export const projects: Project[] = [
   {
@@ -18,7 +20,7 @@ export const projects: Project[] = [
     name: 'NeedSoon（ないかも）',
     category: 'iOS',
     featured: true,
-    status: 'coming-soon',
+    status: 'active',
     technologies: ['Swift', 'SwiftUI', 'Supabase', 'WidgetKit'],
     platforms: ['iPhone', 'iPad', 'Apple Watch'],
     hasDetailPage: true,
@@ -35,6 +37,7 @@ export const projects: Project[] = [
       { ja: 'ウィジェット・Siri・Apple Watchに対応', en: 'Widget, Siri, and Apple Watch support' },
       { ja: 'サインアップ不要のQRコードで家族と共有', en: 'No-signup QR code sharing with your household' },
     ],
+    appStoreUrl: 'https://apps.apple.com/jp/app/id6792124859',
     supportUrl: 'https://isitest1.github.io/needsoon-support/',
     screenshots: ['/projects/needsoon-1.png'],
   },
@@ -60,6 +63,7 @@ export const projects: Project[] = [
       { ja: 'トレーニングで育つマスコット', en: 'A mascot that grows as you train' },
       { ja: '休養日を守るしくみ', en: 'Built-in rest-day protection' },
     ],
+    appStoreUrl: 'https://apps.apple.com/jp/app/id6790803132',
     supportUrl: 'https://isitest1.github.io/workoutquest-site/',
   },
   {
@@ -115,7 +119,7 @@ export const projects: Project[] = [
     id: 'unit-price-scanner',
     name: 'UnitPriceScanner',
     category: 'iOS',
-    status: 'coming-soon',
+    status: 'active',
     technologies: ['Swift', 'SwiftUI', 'Vision', 'AVFoundation'],
     platforms: ['iPhone'],
     hasDetailPage: true,
@@ -132,13 +136,14 @@ export const projects: Project[] = [
       { ja: '魚・野菜の重さ推定', en: 'Weight estimation for fish and produce' },
       { ja: '直近30件の履歴を端末内に保存', en: 'Keeps the last 30 scans on-device' },
     ],
+    appStoreUrl: 'https://apps.apple.com/jp/app/id6789856620',
     supportUrl: 'https://isitest1.github.io/unitpricescanner-support/',
   },
   {
     id: 'ensemble-stage',
     name: 'EnsembleStage',
     category: 'iOS',
-    status: 'coming-soon',
+    status: 'active',
     technologies: ['Swift', 'SwiftUI', 'SwiftData'],
     platforms: ['iPhone', 'iPad'],
     hasDetailPage: true,
@@ -155,6 +160,7 @@ export const projects: Project[] = [
       { ja: 'ドラッグで微調整', en: 'Fine-tune positions by dragging' },
       { ja: 'PDF / PNGで書き出し', en: 'Export as PDF or PNG' },
     ],
+    appStoreUrl: 'https://apps.apple.com/jp/app/id6793795823',
     supportUrl: 'https://isitest1.github.io/ensemble-stage-site/',
     screenshots: ['/projects/ensemblestage-1.png'],
   },
@@ -162,7 +168,7 @@ export const projects: Project[] = [
     id: 'netagicho',
     name: 'ネタ帳',
     category: 'iOS',
-    status: 'coming-soon',
+    status: 'active',
     technologies: ['Swift', 'SwiftUI'],
     platforms: ['iPhone'],
     hasDetailPage: true,
@@ -179,12 +185,13 @@ export const projects: Project[] = [
       { ja: '「話した」「取っておく」で振り返り', en: '"Talked about" / "keep for later" review states' },
       { ja: 'ランダム表示・検索に対応', en: 'Random shuffle and search' },
     ],
+    appStoreUrl: 'https://apps.apple.com/jp/app/id6797323735',
     supportUrl: 'https://isitest1.github.io/netagicho/',
     screenshots: ['/projects/futomemo-1.png'],
   },
   {
     id: 'photoslim',
-    name: 'PhotoSlim',
+    name: 'スッキリGB',
     category: 'iOS',
     status: 'coming-soon',
     technologies: ['Swift', 'SwiftUI'],
@@ -205,13 +212,24 @@ export const projects: Project[] = [
     id: 'namecue',
     name: 'NameCue',
     category: 'iOS',
-    status: 'coming-soon',
+    status: 'active',
     technologies: ['Swift', 'SwiftUI'],
     platforms: ['iPhone'],
+    hasDetailPage: true,
     description: {
       ja: '会食や会議で人の名前をそっと確認できる、席順ベースの名前思い出しアプリ。',
       en: 'Recall names discreetly at a dinner or meeting by placing people on a seat map first.',
     },
+    longDescription: {
+      ja: '会う前に席順や座席表として人を配置しておくと、必要なときだけそっと名前を確認できます。データは端末内のみで完結し、Face IDでロックすることもできます。',
+      en: 'Place people on a seat map before you meet them, then glance at a name only when you need it. Everything stays on-device, with an optional Face ID lock.',
+    },
+    features: [
+      { ja: '席順・座席表から名前を確認', en: 'Recall names from a seat map' },
+      { ja: 'データは端末内のみ、通信なし', en: 'On-device only, no network calls' },
+      { ja: 'Face IDでロック可能', en: 'Optional Face ID lock' },
+    ],
+    appStoreUrl: 'https://apps.apple.com/jp/app/id6791782983',
     supportUrl: 'https://isitest1.github.io/NameCue/support.html',
   },
   {
@@ -243,7 +261,7 @@ export const projects: Project[] = [
     id: 'tube-player-for-safari',
     name: 'Tube Player for Safari',
     category: 'Tool',
-    status: 'active',
+    status: 'coming-soon',
     technologies: ['Swift', 'JavaScript'],
     platforms: ['iPhone', 'iPad', 'Mac'],
     description: {
