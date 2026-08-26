@@ -69,7 +69,7 @@ export const projects: Project[] = [
     ],
     appStoreUrl: 'https://apps.apple.com/jp/app/id6790803132',
     supportUrl: 'https://isitest1.github.io/workoutquest-site/',
-    // 実機/App Store提出用のスクリーンショット素材が見つかっていません
+    screenshots: ['/projects/workoutquest-1.png'],
   },
   {
     id: 'furusato-cospa',
@@ -145,7 +145,7 @@ export const projects: Project[] = [
     ],
     appStoreUrl: 'https://apps.apple.com/jp/app/id6789856620',
     supportUrl: 'https://isitest1.github.io/unitpricescanner-support/',
-    // 実機/App Store提出用のスクリーンショット素材が見つかっていません
+    screenshots: ['/projects/unit-price-scanner-1.png'],
   },
   {
     id: 'ensemble-stage',
@@ -240,7 +240,7 @@ export const projects: Project[] = [
     ],
     appStoreUrl: 'https://apps.apple.com/jp/app/id6791782983',
     supportUrl: 'https://isitest1.github.io/NameCue/support.html',
-    // 実機/App Store提出用のスクリーンショット素材が見つかっていません
+    screenshots: ['/projects/namecue-1.png'],
   },
   {
     id: 'record-quick',
