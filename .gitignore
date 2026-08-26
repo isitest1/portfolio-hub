@@ -6,3 +6,4 @@ npm-debug.log*
 *.tsbuildinfo
 AuthKey_*.p8
 *.p8
+/public/sitemap.xml

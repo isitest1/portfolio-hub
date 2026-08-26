@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import { detectLang } from '../i18n/LanguageProvider';
 import { ui } from '../i18n/translations';
+import { useSeo } from '../i18n/seo';
 
 export default function NotFound() {
   const lang = detectLang();
   const t = ui[lang];
+  useSeo(t.notFound.title, t.notFound.body);
   return (
     <div className="page">
       <main className="section">

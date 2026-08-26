@@ -25,15 +25,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, lang);
     document.documentElement.lang = lang;
-    document.title = t.meta.title;
 
-    const setMeta = (attr: 'name' | 'property', key: string, content: string) => {
-      const el = document.querySelector(`meta[${attr}="${key}"]`);
-      if (el) el.setAttribute('content', content);
-    };
-    setMeta('name', 'description', t.meta.description);
-    setMeta('property', 'og:title', t.meta.title);
-    setMeta('property', 'og:description', t.meta.description);
+    // title / description / og:title / og:description は各ページの useSeo() が設定する
 
     // hreflang: ja/en を同じページ同士で関連付ける
     const origin = window.location.origin;
@@ -41,6 +34,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const restPath = location.pathname.replace(/^\/(ja|en)/, '');
     const urlFor = (l: Lang) => origin + base + '/' + l + restPath;
 
+    const setMeta = (attr: 'name' | 'property', key: string, content: string) => {
+      const el = document.querySelector(`meta[${attr}="${key}"]`);
+      if (el) el.setAttribute('content', content);
+    };
     setMeta('property', 'og:url', urlFor(lang));
 
     const setLink = (rel: string, href: string, hreflang?: string) => {
@@ -58,7 +55,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setLink('alternate', urlFor('ja'), 'ja');
     setLink('alternate', urlFor('en'), 'en');
     setLink('alternate', urlFor('ja'), 'x-default');
-  }, [lang, t, location.pathname]);
+  }, [lang, location.pathname]);
 
   const value = useMemo<Ctx>(
     () => ({

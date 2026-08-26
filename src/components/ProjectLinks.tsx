@@ -8,15 +8,22 @@ export default function ProjectLinks({ project, primaryOnly = false }: { project
   const items: { label: string; href?: string; to?: string }[] = [];
 
   if (project.appStoreUrl) items.push({ label: t.links.appStore, href: project.appStoreUrl });
-  if (project.chromeWebStoreUrl) items.push({ label: t.links.chromeWebStore, href: project.chromeWebStoreUrl });
   if (project.websiteUrl) items.push({ label: t.links.website, href: project.websiteUrl });
+  if (project.chromeWebStoreUrl) items.push({ label: t.links.chromeWebStore, href: project.chromeWebStoreUrl });
   if (project.hasDetailPage) items.push({ label: t.links.detail, to: path('projects/' + project.id) });
   if (project.supportUrl) items.push({ label: t.links.support, href: project.supportUrl });
   if (project.githubUrl) items.push({ label: t.links.github, href: project.githubUrl });
   if (project.documentationUrl) items.push({ label: t.links.docs, href: project.documentationUrl });
 
   if (items.length === 0) return null;
-  const list = primaryOnly ? items.slice(0, 1) : items;
+
+  // カード上（primaryOnly）は、主要リンク1件 + サポートリンク（あれば）を常に見せる
+  let list = items;
+  if (primaryOnly) {
+    const support = items.find((i) => i.label === t.links.support);
+    const primary = items.find((i) => i.label !== t.links.support) ?? items[0];
+    list = support && support !== primary ? [primary, support] : [primary];
+  }
 
   return (
     <div className={primaryOnly ? 'links links--primary' : 'links'}>

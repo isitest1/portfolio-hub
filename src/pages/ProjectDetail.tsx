@@ -5,11 +5,32 @@ import ProjectLinks from '../components/ProjectLinks';
 import Shot from '../components/Shot';
 import { projects } from '../data/projects';
 import { useLang } from '../i18n/LanguageProvider';
+import { absoluteUrl, useJsonLd, useSeo } from '../i18n/seo';
 
 export default function ProjectDetail() {
   const { id } = useParams();
   const { lang, t, path } = useLang();
   const project = projects.find((p) => p.id === id);
+
+  useSeo(
+    project ? `${project.name} — Portfolio Hub` : t.notFound.title,
+    project ? project.description[lang] : t.notFound.body
+  );
+
+  const jsonLd = project
+    ? JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: project.name,
+        description: (project.longDescription ?? project.description)[lang],
+        url: project.appStoreUrl ?? project.websiteUrl ?? absoluteUrl(path('projects/' + project.id)),
+        image: project.screenshots?.[0] ? absoluteUrl(project.screenshots[0]) : undefined,
+        applicationCategory: project.category === 'iOS' ? 'MobileApplication' : 'WebApplication',
+        operatingSystem: project.platforms?.join(', '),
+        author: { '@type': 'Person', name: 'Kohei Ishikawa' },
+      })
+    : null;
+  useJsonLd(jsonLd);
 
   if (!project) {
     return (
@@ -75,7 +96,7 @@ export default function ProjectDetail() {
 
         <section className="section">
           <h2 className="eyebrow">{t.detail.screenshots}</h2>
-          <Shot project={project} height={420} />
+          <Shot project={project} height={560} fit="contain" />
         </section>
       </main>
       <Footer />
