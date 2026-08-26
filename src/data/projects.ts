@@ -152,7 +152,7 @@ export const projects: Project[] = [
   },
   {
     id: 'ensemble-stage',
-    name: { ja: 'EnsembleStage', en: 'EnsembleStage' },
+    name: { ja: '吹奏楽セッティング：配置図・座席表', en: 'EnsembleStage' },
     category: 'iOS',
     featured: true,
     status: 'active',
