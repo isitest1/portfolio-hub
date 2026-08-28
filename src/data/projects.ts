@@ -218,7 +218,8 @@ export const projects: Project[] = [
       en: 'Swipe through your camera roll one photo at a time, sorting out near-duplicates and oversized videos as you go.',
     },
     supportUrl: 'https://isitest1.github.io/photoslim-support/',
-    screenshots: ['/projects/phototidy-1.png'],
+    icon: '/projects/photoslim-icon.png',
+    screenshots: ['/projects/photoslim-1.png'],
   },
   {
     id: 'namecue',
