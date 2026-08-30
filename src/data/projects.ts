@@ -288,6 +288,19 @@ export const projects: Project[] = [
     screenshots: ['/projects/tube-player-1.png'],
   },
   {
+    id: 'copy-all-text',
+    name: { ja: '全文コピー', en: 'Copy All: Text' },
+    category: 'iOS',
+    status: 'coming-soon',
+    technologies: ['Swift', 'SwiftUI', 'JavaScript', 'Safari Extension'],
+    platforms: ['iPhone', 'iPad'],
+    description: {
+      ja: 'iPhoneのSafariには、Webページの「すべて選択」がありません。このSafari拡張機能がその操作を追加します。ボタン1回でページのテキストをまとめてコピー。',
+      en: 'Safari on iPhone has no Select All for web pages. This Safari extension adds it — one tap copies the whole page. Free, no ads, no network access.',
+    },
+    supportUrl: 'https://isitest1.github.io/copy-all-text-support/',
+  },
+  {
     id: 'web-monitor-rss',
     name: { ja: 'Web Monitor RSS', en: 'Web Monitor RSS' },
     category: 'Tool',
