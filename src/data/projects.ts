@@ -292,14 +292,30 @@ export const projects: Project[] = [
     id: 'copy-all-text',
     name: { ja: '全文コピー', en: 'Copy All: Text' },
     category: 'iOS',
-    status: 'coming-soon',
+    status: 'active',
     technologies: ['Swift', 'SwiftUI', 'JavaScript', 'Safari Extension'],
     platforms: ['iPhone', 'iPad'],
+    hasDetailPage: true,
     description: {
       ja: 'iPhoneのSafariには、Webページの「すべて選択」がありません。このSafari拡張機能がその操作を追加します。ボタン1回でページのテキストをまとめてコピー。',
       en: 'Safari on iPhone has no Select All for web pages. This Safari extension adds it — one tap copies the whole page. Free, no ads, no network access.',
     },
+    longDescription: {
+      ja: '共有シートから開くだけで、ページ全体・本文だけ・タップで選んだ範囲など、必要な形でテキストを取り出せます。Markdown形式やAIに貼り付けやすい形式でのコピーにも対応。通信は一切行わず、データも収集しません。',
+      en: 'Open it from the share sheet and pull out exactly the text you need — the whole page, just the article, or a tapped selection. Also copies as Markdown or in an AI-friendly format. No network access, no data collection.',
+    },
+    features: [
+      { ja: 'ボタン1回でページ全体をコピー', en: 'Copy the whole page in one tap' },
+      { ja: '広告やメニューを除いた本文だけコピー', en: 'Copy just the article, stripped of ads and menus' },
+      { ja: 'タップで選んだ範囲だけコピー', en: 'Tap to select and copy just that region' },
+      { ja: 'Markdown・AI用・クリーンコピーにも対応', en: 'Also copies as Markdown, for AI, or as clean text' },
+    ],
+    appStoreUrl: 'https://apps.apple.com/jp/app/id6805767687',
     supportUrl: 'https://isitest1.github.io/copy-all-text-support/',
+    screenshotsByLang: {
+      ja: ['/projects/copy-all-text-ja-1.png'],
+      en: ['/projects/copy-all-text-en-1.png'],
+    },
   },
   {
     id: 'web-monitor-rss',
