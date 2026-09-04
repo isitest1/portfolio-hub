@@ -318,6 +318,30 @@ export const projects: Project[] = [
     },
   },
   {
+    id: 'xcode-sentinel',
+    name: { ja: 'XcodeSentinel', en: 'XcodeSentinel' },
+    category: 'Tool',
+    status: 'active',
+    technologies: ['Swift', 'SwiftUI', 'AppKit', 'Accessibility API'],
+    platforms: ['Mac'],
+    hasDetailPage: true,
+    description: {
+      ja: '外出中や就寝中にXcode内のClaudeが利用量制限で止まったままにならないよう、決めた時刻に自動で再開させるmacOSのメニューバーアプリ。',
+      en: 'A macOS menu-bar app that resumes your Xcode-integrated Claude session at a time you set — so it isn’t still stalled on a usage limit while you’re away or asleep.',
+    },
+    longDescription: {
+      ja: '利用量制限そのものを回避するツールではありません。制限が解除されているはずの時刻に、あらかじめ設定した「続けて」のようなメッセージを自動送信して、既存のセッションを再開させるだけです。権限確認やClaudeからの質問には応答せず、状態が読み取れないときは何も送信しません。対象はXcodeに組み込まれたClaude連携のみで、VS Code拡張やターミナルのClaude Codeは対象外です（Apple・Anthropic公式の製品ではありません）。',
+      en: 'It doesn’t get around usage limits — it just nudges an existing session back to life at the time the limit should have lifted, by sending a message like “continue” that you configure ahead of time. It won’t answer permission prompts or questions from Claude, and sends nothing when it can’t read the session’s state. Built specifically for Xcode’s built-in Claude integration, not the VS Code extension or terminal Claude Code, and it isn’t an official Apple or Anthropic product.',
+    },
+    features: [
+      { ja: '指定した時刻に自動でメッセージを送信して再開', en: 'Auto-sends your message at the time you schedule' },
+      { ja: '状態が読み取れないときは何も送信しない', en: 'Sends nothing when it can’t read the session state' },
+      { ja: 'Webhookでスマートフォンへ通知', en: 'Webhook notifications to your phone' },
+    ],
+    websiteUrl: 'https://isitest1.github.io/XcodeSentinel/',
+    githubUrl: 'https://github.com/isitest1/XcodeSentinel',
+  },
+  {
     id: 'web-monitor-rss',
     name: { ja: 'Web Monitor RSS', en: 'Web Monitor RSS' },
     category: 'Tool',
