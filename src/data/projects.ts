@@ -337,6 +337,7 @@ export const projects: Project[] = [
       { ja: '指定した時刻に自動でメッセージを送信して再開', en: 'Auto-sends your message at the time you schedule' },
       { ja: '状態が読み取れないときは何も送信しない', en: 'Sends nothing when it can’t read the session state' },
       { ja: 'Webhookでスマートフォンへ通知', en: 'Webhook notifications to your phone' },
+      { ja: '無料・オープンソース（MIT License）', en: 'Free and open source (MIT License)' },
     ],
     websiteUrl: 'https://isitest1.github.io/XcodeSentinel/',
     githubUrl: 'https://github.com/isitest1/XcodeSentinel',
