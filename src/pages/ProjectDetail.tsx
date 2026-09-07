@@ -13,7 +13,7 @@ export default function ProjectDetail() {
   const project = projects.find((p) => p.id === id);
 
   useSeo(
-    project ? `${project.name[lang]} — Kohei Ishikawa Portfolio Hub` : t.notFound.title,
+    project ? `${project.name[lang]} — Margherita Works` : t.notFound.title,
     project ? project.description[lang] : t.notFound.body
   );
 

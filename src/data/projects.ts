@@ -373,7 +373,7 @@ export const projects: Project[] = [
   },
   {
     id: 'portfolio-hub',
-    name: { ja: 'Portfolio Hub', en: 'Portfolio Hub' },
+    name: { ja: 'Margherita Works', en: 'Margherita Works' },
     category: 'Website',
     status: 'active',
     technologies: ['React', 'TypeScript', 'Vite', 'GitHub Pages'],
