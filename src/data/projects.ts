@@ -42,7 +42,7 @@ export const projects: Project[] = [
       { ja: 'サインアップ不要のQRコードで家族と共有', en: 'No-signup QR code sharing with your household' },
     ],
     appStoreUrl: 'https://apps.apple.com/jp/app/id6792124859',
-    supportUrl: 'https://isitest1.github.io/needsoon-support/',
+    supportUrl: 'https://needsoon.margheritaworks.com/',
     screenshots: ['/projects/needsoon-1.png'],
   },
   {
@@ -68,7 +68,7 @@ export const projects: Project[] = [
       { ja: '休養日を守るしくみ', en: 'Built-in rest-day protection' },
     ],
     appStoreUrl: 'https://apps.apple.com/jp/app/id6790803132',
-    supportUrl: 'https://isitest1.github.io/workoutquest-site/',
+    supportUrl: 'https://workoutquest.margheritaworks.com/',
     screenshotsByLang: {
       ja: ['/projects/workoutquest-ja-1.png'],
       en: ['/projects/workoutquest-en-1.png'],
@@ -121,7 +121,7 @@ export const projects: Project[] = [
       { ja: 'ショートカットで画面の好きな範囲を選択', en: 'Shortcut-driven selection of any screen region' },
       { ja: '署名・公証済みDMGで配布', en: 'Distributed as a signed, notarized DMG' },
     ],
-    websiteUrl: 'https://isitest1.github.io/TextSnap/',
+    websiteUrl: 'https://textsnap.margheritaworks.com/',
     githubUrl: 'https://github.com/isitest1/TextSnap',
     screenshots: ['/projects/textsnap-1.png'],
   },
@@ -147,7 +147,7 @@ export const projects: Project[] = [
       { ja: '直近30件の履歴を端末内に保存', en: 'Keeps the last 30 scans on-device' },
     ],
     appStoreUrl: 'https://apps.apple.com/jp/app/id6789856620',
-    supportUrl: 'https://isitest1.github.io/unitpricescanner-support/',
+    supportUrl: 'https://unit-price-scanner.margheritaworks.com/',
     screenshots: ['/projects/unit-price-scanner-1.png'],
   },
   {
@@ -173,7 +173,7 @@ export const projects: Project[] = [
       { ja: 'PDF / PNGで書き出し', en: 'Export as PDF or PNG' },
     ],
     appStoreUrl: 'https://apps.apple.com/jp/app/id6793795823',
-    supportUrl: 'https://isitest1.github.io/ensemble-stage-site/',
+    supportUrl: 'https://ensemble-stage.margheritaworks.com/',
     screenshots: ['/projects/ensemblestage-1.png'],
   },
   {
@@ -198,7 +198,7 @@ export const projects: Project[] = [
       { ja: 'ランダム表示・検索に対応', en: 'Random shuffle and search' },
     ],
     appStoreUrl: 'https://apps.apple.com/jp/app/id6797323735',
-    supportUrl: 'https://isitest1.github.io/netagicho/',
+    supportUrl: 'https://netagicho.margheritaworks.com/',
     screenshots: ['/projects/futomemo-1.png'],
   },
   {
@@ -218,7 +218,7 @@ export const projects: Project[] = [
       en: 'Swipe through your camera roll one photo at a time, sorting out near-duplicates and oversized videos as you go.',
     },
     appStoreUrl: 'https://apps.apple.com/jp/app/id6802024030',
-    supportUrl: 'https://isitest1.github.io/photoslim-support/',
+    supportUrl: 'https://photoslim.margheritaworks.com/',
     icon: '/projects/photoslim-icon.png',
     screenshots: ['/projects/photoslim-1.png'],
   },
@@ -258,7 +258,7 @@ export const projects: Project[] = [
       ja: 'ワンタップで録音を開始でき、バックグラウンドでも止まらない録音アプリ。最大30言語の文字起こしに対応。',
       en: 'Start recording in one tap and keep going in the background, with speech-to-text in roughly 30 languages.',
     },
-    supportUrl: 'https://isitest1.github.io/RecordQuick-site/',
+    supportUrl: 'https://record-quick.margheritaworks.com/',
     // 実機/App Store提出用のスクリーンショット素材が見つかっていません
   },
   {
@@ -285,7 +285,7 @@ export const projects: Project[] = [
       ja: 'SafariのYouTube再生をネイティブのHTML5プレーヤーに置き換える機能拡張。AirPlayやPinP、通信・解析なしに対応。',
       en: 'A Safari Web Extension that swaps YouTube’s player for native HTML5 — AirPlay and Picture-in-Picture, zero network calls.',
     },
-    supportUrl: 'https://isitest1.github.io/tube-player-for-safari-site/',
+    supportUrl: 'https://tube-player-for-safari.margheritaworks.com/',
     screenshots: ['/projects/tube-player-1.png'],
   },
   {
@@ -311,7 +311,7 @@ export const projects: Project[] = [
       { ja: 'Markdown・AI用・クリーンコピーにも対応', en: 'Also copies as Markdown, for AI, or as clean text' },
     ],
     appStoreUrl: 'https://apps.apple.com/jp/app/id6805767687',
-    supportUrl: 'https://isitest1.github.io/copy-all-text-support/',
+    supportUrl: 'https://copy-all-text.margheritaworks.com/',
     screenshotsByLang: {
       ja: ['/projects/copy-all-text-ja-1.png'],
       en: ['/projects/copy-all-text-en-1.png'],
@@ -339,7 +339,7 @@ export const projects: Project[] = [
       { ja: 'Webhookでスマートフォンへ通知', en: 'Webhook notifications to your phone' },
       { ja: '無料・オープンソース（MIT License）', en: 'Free and open source (MIT License)' },
     ],
-    websiteUrl: 'https://isitest1.github.io/XcodeSentinel/',
+    websiteUrl: 'https://xcode-sentinel.margheritaworks.com/',
     githubUrl: 'https://github.com/isitest1/XcodeSentinel',
   },
   {
@@ -367,7 +367,7 @@ export const projects: Project[] = [
       ja: '2つのテキストを並べて比較し、差分をハイライトするだけのシンプルなツール。',
       en: 'A no-frills side-by-side text-diff tool — paste two versions, see what changed.',
     },
-    websiteUrl: 'https://isitest1.github.io/text-compare/',
+    websiteUrl: 'https://text-compare.margheritaworks.com/',
     githubUrl: 'https://github.com/isitest1/text-compare',
     screenshots: ['/projects/text-compare-1.png'],
   },

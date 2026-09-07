@@ -1,10 +1,10 @@
-# Portfolio Hub
+# Margherita Works
 
-個人開発のiPhoneアプリ・Webアプリ・ツールをまとめるポートフォリオサイト。デザイン方向は "Grid Poster"（大きなグロテスク見出し + カテゴリ3列グリッド）。
+個人開発のiPhoneアプリ・Webアプリ・ツールをまとめるポートフォリオサイト。公開URL: https://margheritaworks.com/ 。デザイン方向は "Grid Poster"（大きなグロテスク見出し + カテゴリ3列グリッド）。
 
 - React 18 + TypeScript + Vite
 - 日本語 / 英語（`/ja/`, `/en/`）
-- GitHub Pages + GitHub Actions で公開
+- 独自ドメイン（Cloudflare DNS）+ GitHub Pages + GitHub Actions で公開
 
 ## 開発（Dev Container）
 
@@ -39,10 +39,11 @@ public/         favicon, robots.txt, 404.html(SPA fallback)
 
 ## GitHub Pages
 
-1. `vite.config.ts` の `base` をリポジトリ名に合わせる（例 `/portfolio-hub/`）。ユーザーページなら `'/'`。
-2. `base` を `'/'` にした場合は `public/404.html` の `segments` を `0` にする。
-3. リポジトリ Settings → Pages → Source を **GitHub Actions** に。
-4. `main` に push すると `.github/workflows/deploy.yml` がデプロイ。
+独自ドメイン `margheritaworks.com` でルート配信しているため、`vite.config.ts` の `base` は `'/'`、`public/404.html` の `segments` は `0`、`public/CNAME` に `margheritaworks.com` を設定済み。
+
+1. リポジトリ Settings → Pages → Source は **GitHub Actions**。Custom domain は `margheritaworks.com`（Cloudflare DNSでA/AAAAレコードをGitHub Pagesへ向けている）。
+2. `main` に push すると `.github/workflows/deploy.yml` がデプロイ。
+3. サブパス配信に戻す場合のみ `base` をリポジトリ名（例 `/portfolio-hub/`）にし、`public/404.html` の `segments` を `1` に戻す。
 
 ## 言語の決定順
 

@@ -1,4 +1,6 @@
-# Portfolio Hub プロジェクト — CLAUDE.md
+# Margherita Works プロジェクト — CLAUDE.md
+
+正式なブランド名は **Margherita Works**、正式な公開URLは **https://margheritaworks.com/**（日本語: `/ja/`、英語: `/en/`）。旧称は「Portfolio Hub」、旧URLは `https://isitest1.github.io/portfolio-hub/`（新ドメインへ自動転送設定済み）。URL設計の詳細は `margherita-works-domain-migration-plan.md` と `docs/phase0〜phase4-*.md` を参照。
 
 ## 1. このプロジェクトについて
 
@@ -955,4 +957,4 @@ Contact
 6. GitHub Pagesで安定して動作すること
 7. 過剰な技術的複雑性を避けること
 
-「とりあえず動くサイト」ではなく、今後アプリやWebサイトが増えても長期間使用できるPortfolio Hubとして設計してください。
+「とりあえず動くサイト」ではなく、今後アプリやWebサイトが増えても長期間使用できるMargherita Worksとして設計してください。
