@@ -273,7 +273,7 @@ export const projects: Project[] = [
       ja: '釣れた瞬間に1枚撮るだけ。場所・時刻・潮回り・海底の底質まで記録になるボート釣り釣果ログアプリ。',
       en: 'Photograph the moment you catch a fish. One shot becomes a complete record with location, tide, and sea floor type.',
     },
-    supportUrl: 'https://margheritaworks.com/ja/choka-log/',
+    supportUrl: 'https://chokalog.margheritaworks.com/',
   },
   {
     id: 'rig-sketch',
