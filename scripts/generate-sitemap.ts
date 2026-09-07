@@ -4,7 +4,7 @@ import path from 'node:path';
 import { projects } from '../src/data/projects';
 import { languages } from '../src/i18n/translations';
 
-const SITE_URL = 'https://isitest1.github.io/portfolio-hub';
+const SITE_URL = 'https://margheritaworks.com';
 
 const urls: string[] = [];
 for (const lang of languages) {

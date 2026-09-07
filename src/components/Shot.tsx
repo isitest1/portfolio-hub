@@ -17,7 +17,7 @@ export default function Shot({
 }) {
   const src = project.screenshotsByLang?.[lang]?.[0] ?? project.screenshots?.[0];
   if (src) {
-    // public/ 配下の絶対パスは GitHub Pages の base（/portfolio-hub/）を通す必要がある
+    // public/ 配下の絶対パスは Vite の base を通す必要がある（独自ドメインでは base='/'）
     const resolvedSrc = import.meta.env.BASE_URL.replace(/\/$/, '') + src;
     return <img className={`shot shot--${fit}`} src={resolvedSrc} alt={alt} height={height} loading="lazy" />;
   }

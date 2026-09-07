@@ -5,7 +5,7 @@
     <title>Redirecting…</title>
     <script>
       // GitHub Pages の SPA フォールバック: パスを ?/ に退避して index.html に戻す
-      var segments = 1; // base が '/repo-name/' の場合は 1、ユーザーページ('/')なら 0
+      var segments = 0; // 独自ドメイン（margheritaworks.com）でルート配信のため 0
       var l = window.location;
       var path = l.pathname.split('/').slice(1 + segments).join('/');
       l.replace(
