@@ -14,6 +14,13 @@ for (const lang of languages) {
   }
 }
 
+// 静的サポートページ（SPA の外に置かれる public/ の HTML）
+const staticPages = [
+  `${SITE_URL}/ja/choka-log/`,
+  `${SITE_URL}/ja/choka-log/privacy/`,
+];
+urls.push(...staticPages);
+
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((u) => `  <url><loc>${u}</loc></url>`).join('\n')}

@@ -262,6 +262,20 @@ export const projects: Project[] = [
     // 実機/App Store提出用のスクリーンショット素材が見つかっていません
   },
   {
+    id: 'choka-log',
+    name: { ja: '釣果ログ', en: 'Choka Log' },
+    category: 'iOS',
+    status: 'coming-soon',
+    technologies: ['Swift', 'SwiftUI', 'SwiftData', 'Cloudflare Workers'],
+    platforms: ['iPhone'],
+    hasDetailPage: false,
+    description: {
+      ja: '釣れた瞬間に1枚撮るだけ。場所・時刻・潮回り・海底の底質まで記録になるボート釣り釣果ログアプリ。',
+      en: 'Photograph the moment you catch a fish. One shot becomes a complete record with location, tide, and sea floor type.',
+    },
+    supportUrl: 'https://margheritaworks.com/ja/choka-log/',
+  },
+  {
     id: 'rig-sketch',
     name: { ja: 'RigSketch', en: 'RigSketch' },
     category: 'iOS',
