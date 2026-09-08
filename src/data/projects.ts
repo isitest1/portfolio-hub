@@ -244,7 +244,7 @@ export const projects: Project[] = [
       { ja: 'Face IDでロック可能', en: 'Optional Face ID lock' },
     ],
     appStoreUrl: 'https://apps.apple.com/jp/app/id6791782983',
-    supportUrl: 'https://isitest1.github.io/NameCue/support.html',
+    supportUrl: 'https://namecue.margheritaworks.com/support.html',
     screenshots: ['/projects/namecue-1.png'],
   },
   {
