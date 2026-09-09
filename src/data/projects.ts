@@ -381,7 +381,7 @@ export const projects: Project[] = [
       ja: '2つのテキストを並べて比較し、差分をハイライトするだけのシンプルなツール。',
       en: 'A no-frills side-by-side text-diff tool — paste two versions, see what changed.',
     },
-    websiteUrl: 'https://text-compare.margheritaworks.com/',
+    websiteUrl: 'https://isitest1.github.io/text-compare/',
     githubUrl: 'https://github.com/isitest1/text-compare',
     screenshots: ['/projects/text-compare-1.png'],
   },
