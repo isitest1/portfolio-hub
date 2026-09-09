@@ -1,6 +1,6 @@
 import LanguageSwitcher from './LanguageSwitcher';
 
-const CONTACT_EMAIL = 'kouhei10@gmail.com';
+const CONTACT_EMAIL = 'support@margheritaworks.com';
 
 export default function Footer() {
   return (
