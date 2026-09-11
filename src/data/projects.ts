@@ -367,8 +367,9 @@ export const projects: Project[] = [
       ja: 'Webページの好きな部分をクリックで指定し、変化があったときだけプライベートなRSSで受け取れる監視ツール。',
       en: 'Point-and-click to select part of a webpage, then get a private RSS feed only when it changes.',
     },
+    supportUrl: 'https://webmonitorrss.margheritaworks.com/',
     githubUrl: 'https://github.com/isitest1/web-monitor-rss',
-    // 個人利用専用ツールで公開URLが無いため、スクリーンショットを用意できません
+    // スクリーンショット素材が見つかっていません
   },
   {
     id: 'text-compare',
