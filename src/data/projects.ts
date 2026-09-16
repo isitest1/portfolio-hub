@@ -357,6 +357,10 @@ export const projects: Project[] = [
     ],
     websiteUrl: 'https://xcode-sentinel.margheritaworks.com/',
     githubUrl: 'https://github.com/isitest1/XcodeSentinel',
+    screenshotsByLang: {
+      ja: ['/projects/xcode-sentinel-ja-1.png'],
+      en: ['/projects/xcode-sentinel-en-1.png'],
+    },
   },
   {
     id: 'web-monitor-rss',
