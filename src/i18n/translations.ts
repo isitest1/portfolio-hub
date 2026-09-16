@@ -50,7 +50,7 @@ export const ui: Record<Lang, UI> = {
     about:
       'ひとりで企画・設計・実装まで行っています。使う人が迷わないこと、開いてすぐ用が済むことを基準にプロダクトを選んでいます。',
     meta_count: (n: number) => 'プロダクト ' + n + ' 件',
-    updated: '最終更新 2026.08',
+    updated: '最終更新 2026.09',
     links: {
       appStore: 'App Store',
       chromeWebStore: 'Chrome ウェブストア',
@@ -89,7 +89,7 @@ export const ui: Record<Lang, UI> = {
     about:
       'I design and build everything myself. A product ships when it is obvious to use and finishes the job the moment you open it.',
     meta_count: (n: number) => n + ' products',
-    updated: 'Updated 2026.08',
+    updated: 'Updated 2026.09',
     links: {
       appStore: 'App Store',
       chromeWebStore: 'Chrome Web Store',
