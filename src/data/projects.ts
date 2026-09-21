@@ -333,6 +333,32 @@ export const projects: Project[] = [
     },
   },
   {
+    id: 'prime-speed-controller',
+    name: { ja: 'アマプラ倍速', en: 'Prime Speed Controller' },
+    category: 'iOS',
+    status: 'active',
+    technologies: ['Swift', 'JavaScript', 'Safari Extension'],
+    platforms: ['iPhone', 'iPad'],
+    hasDetailPage: true,
+    description: {
+      ja: 'SafariのPrime VideoにA-Bリピート・倍速再生・送り戻しを追加する、語学学習にも使える無料の拡張機能。',
+      en: 'A free Safari extension that adds A-B repeat, variable speed, and skip controls to Prime Video — handy for language study too.',
+    },
+    longDescription: {
+      ja: '開始点と終了点をタップするだけで、好きなシーンを繰り返し再生できるA-Bリピート。0.5倍から5倍まで15段階、0.05倍単位でも調整できる倍速再生。5秒・10秒・15秒・30秒から選べる送り戻し。倍速視聴で節約した時間はパネルに自動表示されます。設定は端末内に保存され、外部サーバーへの通信は一切行いません。Amazon・Prime Videoとは無関係の非公式拡張機能です。',
+      en: 'Tap a start and end point to loop any scene with A-B repeat. Adjust playback from 0.5x to 5x across 15 presets, with fine-tuning down to 0.05x. Skip forward or back by 5, 10, 15, or 30 seconds. A panel tracks how much time you’ve saved by watching faster. Settings stay on-device, and nothing is sent to an external server. An independent, unofficial extension — not affiliated with Amazon or Prime Video.',
+    },
+    features: [
+      { ja: 'A-Bリピートでシーンを繰り返し再生', en: 'Loop any scene with A-B repeat' },
+      { ja: '0.5〜5倍・15段階の速度調整（0.05倍刻み）', en: '0.5x–5x playback speed in 15 presets, fine-tuned to 0.05x' },
+      { ja: '5秒・10秒・15秒・30秒の送り戻し', en: 'Skip forward or back by 5, 10, 15, or 30 seconds' },
+      { ja: '外部サーバーへの通信なし', en: 'No data sent to an external server' },
+    ],
+    appStoreUrl: 'https://apps.apple.com/jp/app/id6805684433',
+    supportUrl: 'https://isitest1.github.io/prime-speed-support/',
+    // 実機/App Store提出用のスクリーンショット素材が見つかっていません
+  },
+  {
     id: 'xcode-sentinel',
     name: { ja: 'XcodeSentinel', en: 'XcodeSentinel' },
     category: 'Tool',
