@@ -300,7 +300,7 @@ export const projects: Project[] = [
       ja: 'SafariのYouTube再生をネイティブのHTML5プレーヤーに置き換える機能拡張。AirPlayやPinP、通信・解析なしに対応。',
       en: 'A Safari Web Extension that swaps YouTube’s player for native HTML5 — AirPlay and Picture-in-Picture, zero network calls.',
     },
-    supportUrl: 'https://tube-player-for-safari.margheritaworks.com/',
+    supportUrl: 'https://anyspeed.margheritaworks.com/',
     screenshots: ['/projects/tube-player-1.png'],
   },
   {
