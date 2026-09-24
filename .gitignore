@@ -7,3 +7,6 @@ npm-debug.log*
 AuthKey_*.p8
 *.p8
 /public/sitemap.xml
+
+# Search Console export folders (downloaded locally, not repo content)
+*-Coverage-*/
