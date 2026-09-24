@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "sitemap": "tsx scripts/generate-sitemap.ts",
-    "build": "npm run sitemap && tsc -b && vite build",
+    "build": "npm run sitemap && tsc -b && vite build && tsx scripts/prerender.ts",
     "preview": "vite preview",
     "typecheck": "tsc -b --noEmit"
   },
