@@ -1,6 +1,7 @@
 # 共用フィードバック Worker 構築仕様（Margherita Works）
 
 作成日：2026-09-09
+最終更新：2026-09-13（`/wish` エンドポイント追加を反映。実装済みリポジトリ `mw-feedback-worker` の内容に同期）
 対象：Cloudflare Workers ＋ D1 ＋ KV ＋ Email（send_email）
 前提知識：このファイル単体で完結する。
 
@@ -13,6 +14,8 @@ Margherita Works の全アプリ（iOS アプリ内の「ご意見を送る」�
 - アプリは JSON の `app` フィールドで識別する
 
 既存の他 Worker（例：釣果ログの海しる中継）とは **別の新規 Worker** として作る。責務を混ぜない。
+
+2026-09-10 に、同じ Worker へメール登録機能 `/wish`（例：釣果ログの Android 版事前登録）を追加した。設計の背景・受け入れ確認は `chokalog-android-wish-spec.md` を参照。本ファイルの §3.7〜§3.9 と §5 のコードは追加後の最新状態を反映している。
 
 ---
 
@@ -51,7 +54,8 @@ mw-feedback-worker/
     "deploy": "wrangler deploy",
     "db:init:local": "wrangler d1 execute mw-feedback --local --file=schema.sql",
     "db:init": "wrangler d1 execute mw-feedback --remote --file=schema.sql",
-    "summary": "wrangler d1 execute mw-feedback --remote --command \"SELECT app,q,answer,source,COUNT(*) AS n FROM poll_answers GROUP BY app,q,answer,source ORDER BY app,q,n DESC\""
+    "summary": "wrangler d1 execute mw-feedback --remote --command \"SELECT app,q,answer,source,COUNT(*) AS n FROM poll_answers GROUP BY app,q,answer,source ORDER BY app,q,n DESC\"",
+    "wish:summary": "wrangler d1 execute mw-feedback --remote --command \"SELECT app,topic,src,status,COUNT(*) AS n FROM wish_signups GROUP BY app,topic,src,status\""
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250000.0",
@@ -94,14 +98,23 @@ mw-feedback-worker/
 
   "vars": {
     "ALLOWED_APPS": "choka-log,ensemble-stage",
-    "ALLOWED_RETURN_HOSTS": "margheritaworks.com,chokalog.margheritaworks.com,ensemblestage.margheritaworks.com",
+    "ALLOWED_RETURN_HOSTS": "margheritaworks.com,chokalog.margheritaworks.com,ensemble-stage.margheritaworks.com",
     "MAIL_FROM": "noreply@margheritaworks.com",
-    "APP_LABELS": "{\"choka-log\":\"釣果ログ\",\"ensemble-stage\":\"吹奏楽セッティング\"}"
+    "APP_LABELS": "{\"choka-log\":\"釣果ログ\",\"ensemble-stage\":\"吹奏楽セッティング\"}",
+    "SITE_BASE": "https://chokalog.margheritaworks.com"
   }
 }
 ```
 
-**2026-09-24 追加：** Safari 拡張機能「どこでも倍速」（`anyspeed`、ハイフンなし）を `ALLOWED_APPS`/`APP_LABELS` に追加した。この拡張機能は `/wish` を使わないため `SITE_BASES` への追加は不要。
+上記の `ALLOWED_APPS`/`APP_LABELS`/`ALLOWED_RETURN_HOSTS`/`SITE_BASE` は初期構築時の例。**2026-09-24 時点の本番 `wrangler.jsonc` は 10 アプリ登録済み**：
+
+```
+choka-log, copy-all-text, photoslim, netagicho, ensemble-stage, needsoon, namecue, unit-price-scanner, workoutquest, anyspeed
+```
+
+`namecue`・`needsoon`・`netagicho`・`photoslim`・`workoutquest`・`anyspeed` はハイフンなし、`choka-log`・`copy-all-text`・`ensemble-stage`・`unit-price-scanner` はハイフンありで、これは意図した表記（typo ではない）。新しいアプリの `app_id` を決めるときは既存リストの表記ゆれをそのまま踏襲するのではなく、ポートフォリオの `projects.ts` の `id` と一致させること。`SITE_BASE` は `/wish` の戻り先解決に使う値で、現状は `choka-log` 用の値のまま（`/wish` を使うアプリが増えたら要検討）。
+
+**2026-09-24 追加：** 10 アプリ目として Safari 拡張機能「どこでも倍速」を `ALLOWED_APPS`（`anyspeed`、ハイフンなし）・`APP_LABELS`（`"anyspeed":"どこでも倍速"`）に追加。この拡張機能は `/wish` を使わないため `SITE_BASES` への追加は不要。
 
 シークレット（`wrangler secret put` で登録。ファイルに書かない）：
 
@@ -110,8 +123,9 @@ mw-feedback-worker/
 | `NOTIFY_TO` | 通知先。Email Routing で確認済みの Gmail アドレス |
 | `SUMMARY_TOKEN` | 集計 API 用のランダム文字列（`openssl rand -hex 32`） |
 | `IP_SALT` | IP をハッシュ化する塩（`openssl rand -hex 16`） |
+| `UNSUB_SALT` | `/wish` の解除トークンを生成する塩（`openssl rand -hex 16`）。2026-09-10 追加 |
 
-新しいアプリを追加するときは、`ALLOWED_APPS` と `APP_LABELS`（および必要なら `ALLOWED_RETURN_HOSTS`）に追記して再デプロイするだけでよい。
+新しいアプリを追加するときは、`ALLOWED_APPS` と `APP_LABELS`（および必要なら `ALLOWED_RETURN_HOSTS`）に追記して再デプロイするだけでよい。D1/KV/シークレットの変更は不要。
 
 ### schema.sql
 
@@ -139,6 +153,23 @@ CREATE TABLE IF NOT EXISTS poll_answers (
 
 CREATE INDEX IF NOT EXISTS idx_feedback_app_time ON feedback(app, received_at);
 CREATE INDEX IF NOT EXISTS idx_poll_app_q ON poll_answers(app, q);
+
+-- 2026-09-10 追加（/wish 機能。email を扱うため feedback/poll_answers とは別テーブル）
+CREATE TABLE IF NOT EXISTS wish_signups (
+  id           INTEGER PRIMARY KEY AUTOINCREMENT,
+  received_at  TEXT NOT NULL,
+  app          TEXT NOT NULL,             -- choka-log
+  topic        TEXT NOT NULL,             -- android（将来 ipad など追加可）
+  email        TEXT NOT NULL,             -- 表示用（入力そのまま、trim のみ）
+  email_norm   TEXT NOT NULL,             -- 小文字化。重複判定用
+  device       TEXT,                      -- pixel | galaxy | xperia | other | NULL
+  src          TEXT,                      -- ig | x | fb | site | appstore | NULL
+  unsub_token  TEXT NOT NULL,             -- 解除用。sha256(email_norm + UNSUB_SALT) の先頭 32 桁
+  status       TEXT NOT NULL DEFAULT 'active',  -- active | unsubscribed
+  invited_at   TEXT,                      -- テスト招待メールを送った日時（手動更新）
+  UNIQUE (app, topic, email_norm)
+);
+CREATE INDEX IF NOT EXISTS idx_wish_app_topic ON wish_signups(app, topic, status);
 ```
 
 ---
@@ -265,6 +296,7 @@ KV に `rl:<endpoint>:<sha256(IP + IP_SALT)>` を TTL 付きで保存し、回�
 
 - `/feedback`：1 時間に 5 件
 - `/poll`：1 日に 3 件
+- `/wish`：1 日に 3 件
 
 生の IP は保存しない（ハッシュのみ）。
 
@@ -273,6 +305,27 @@ KV に `rl:<endpoint>:<sha256(IP + IP_SALT)>` を TTL 付きで保存し、回�
 `Origin` が `https://*.margheritaworks.com` または `https://margheritaworks.com` のときだけ、`Access-Control-Allow-Origin` に同じ値を返す。`OPTIONS` は `204`。iOS アプリの `URLSession` は CORS の対象外なので影響しない。
 
 **2026-09-24 追加：** Safari 拡張機能（`safari-web-extension://<インストールごとのUUID>`）の設定ページからの `fetch` を通すため、`Origin` が `^safari-web-extension://[0-9A-Fa-f-]+$` に一致する場合も許可する。**ただし `/feedback` へのアクセスに限る**（`/poll/summary`・`/wish/summary`・`/wish/export` などの管理系エンドポイントには適用しない。`corsHeaders()` がリクエストのパスを見て判定する）。`chrome-extension://` など他ブラウザの拡張機能スキームは対象外。
+
+### 3.7 `POST /wish`（メール登録。2026-09-10 追加）
+
+サポートサイトの `<form>`（form-encoded、JS なし）または JSON で受け付ける。詳細な背景・UIは `chokalog-android-wish-spec.md` を参照。ここでは Worker 側の契約のみ記す。
+
+フィールド：`app`, `topic`（`ALLOWED_TOPICS` に含まれる値。現状 `"android"` のみ）, `email`, `device`（`pixel|galaxy|xperia|other`、任意）, `src`（流入元タグ、任意、`[a-z0-9-]{1,16}`）, `website`（ハニーポット。値が入っていたら成功したふりをして何もしない）, `return`（戻り先。`ALLOWED_RETURN_HOSTS` 外なら `SITE_BASE + フォールバックパス` に戻す）。
+
+処理：`email` を正規化（小文字化）した `email_norm` で `wish_signups` に upsert（`UNIQUE(app, topic, email_norm)`、重複登録は無言で `status='active'` に戻すだけ。メールの存在有無を漏らさない）。`unsub_token = sha256(email_norm + UNSUB_SALT)` の先頭32桁を保存。通知メールは送らない。
+
+レスポンス：JSONなら `204`、form なら `303` で `return + "#thanks"`（レート制限超過は `#error-rate`、メール形式不正は `#error-email`）。
+
+### 3.8 `GET /wish/unsubscribe?app=&topic=&t=`
+
+`app`・`topic`・`t`（32桁hex token）を照合し、一致すれば該当行を `status='unsubscribed'` に更新して `SITE_BASE + "/android/unsubscribed/"` へ `303` リダイレクト。不正なら `400`。
+
+### 3.9 `GET /wish/summary` ・ `GET /wish/export`（開発者だけ）
+
+どちらも `Authorization: Bearer <SUMMARY_TOKEN>` 必須（なければ `401`）。クエリ `app`・`topic`（省略時 `choka-log`・`android`）。
+
+- `/wish/summary`：`status='active'` の件数・流入元別・端末別・週別内訳・招待済み件数をJSONで返す
+- `/wish/export`：`status='active'` の一覧をCSV（BOM付き、`Content-Disposition: attachment`）でダウンロードさせる
 
 ---
 
@@ -310,7 +363,7 @@ npm run deploy
 
 ```ts
 import { EmailMessage } from "cloudflare:email";
-import { createMimeMessage } from "mimetext";
+import { createMimeMessage, Mailbox } from "mimetext";
 
 export interface Env {
   DB: D1Database;
@@ -323,12 +376,21 @@ export interface Env {
   NOTIFY_TO: string;
   SUMMARY_TOKEN: string;
   IP_SALT: string;
+  SITE_BASE: string;
+  UNSUB_SALT: string;
 }
 
 const TYPES = new Set(["bug", "request", "question", "other"]);
 const TYPE_JA: Record<string, string> = { bug: "不具合", request: "要望", question: "質問", other: "その他" };
 const ID_RE = /^[a-z0-9-]{1,64}$/;
 const FORBIDDEN_DIAG_KEYS = /^(lat|lon|latitude|longitude|name|names|title|id|idfv|uuid)$/i;
+
+const ALLOWED_TOPICS = new Set(["android"]);
+const DEVICES = new Set(["pixel", "galaxy", "xperia", "other"]);
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const SRC_RE = /^[a-z0-9-]{1,16}$/;
+const TOPIC_RE = /^[a-z0-9-]{1,32}$/;
+const TOKEN_RE = /^[0-9a-f]{32}$/;
 
 class HttpError extends Error {
   constructor(public status: number, message: string) { super(message); }
@@ -454,7 +516,7 @@ async function handleFeedback(req: Request, env: Env): Promise<Response> {
     msg.setSender({ name: "Margherita Works Feedback", addr: env.MAIL_FROM });
     msg.setRecipient(env.NOTIFY_TO);
     msg.setSubject(subject);
-    if (email) msg.setHeader("Reply-To", email);
+    if (email) msg.setHeader("Reply-To", new Mailbox(email));
     msg.addMessage({ contentType: "text/plain", data: body });
     await env.EMAIL.send(new EmailMessage(env.MAIL_FROM, env.NOTIFY_TO, msg.asRaw()));
   }
@@ -500,6 +562,123 @@ async function handleSummary(req: Request, env: Env): Promise<Response> {
   return json(200, { rows: rows.results });
 }
 
+async function sha256Hex(s: string): Promise<string> {
+  const h = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
+  return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+function resolveReturn(env: Env, ret: unknown, fallbackPath: string): string {
+  if (typeof ret === "string") {
+    try {
+      const u = new URL(ret);
+      const hosts = new Set(env.ALLOWED_RETURN_HOSTS.split(",").map(s => s.trim()));
+      if (u.protocol === "https:" && hosts.has(u.hostname)) { u.hash = ""; return u.toString(); }
+    } catch { /* ignore */ }
+  }
+  return env.SITE_BASE + fallbackPath;
+}
+
+const redirect = (to: string) => new Response(null, { status: 303, headers: { location: to } });
+
+async function handleWish(req: Request, env: Env): Promise<Response> {
+  const isJson = (req.headers.get("content-type") ?? "").includes("application/json");
+  const b = await readBody(req);
+  const ret = resolveReturn(env, b.return, "/android/");
+
+  // 回数制限
+  try {
+    await rateLimit(req, env, "wish", 3, 86400);
+  } catch (e) {
+    if (isJson) throw e;
+    return redirect(ret + "#error-rate");
+  }
+
+  // ハニーポット：ボットには成功したふりをする
+  if (typeof b.website === "string" && b.website.trim() !== "") {
+    return isJson ? new Response(null, { status: 204, headers: corsHeaders(req) }) : redirect(ret + "#thanks");
+  }
+
+  const app = b.app;
+  if (typeof app !== "string" || !allowedApps(env).has(app)) throw new HttpError(400, "app が不正です");
+  const topic = b.topic;
+  if (typeof topic !== "string" || !TOPIC_RE.test(topic) || !ALLOWED_TOPICS.has(topic)) throw new HttpError(400, "topic が不正です");
+
+  const email = typeof b.email === "string" ? b.email.trim() : "";
+  if (email.length === 0 || email.length > 254 || !EMAIL_RE.test(email)) {
+    if (isJson) throw new HttpError(400, "メールアドレスの形式が正しくありません");
+    return redirect(ret + "#error-email");
+  }
+  const emailNorm = email.toLowerCase();
+  const device = typeof b.device === "string" && DEVICES.has(b.device) ? b.device : null;
+  const src = typeof b.src === "string" && SRC_RE.test(b.src) ? b.src : null;
+  const token = (await sha256Hex(emailNorm + env.UNSUB_SALT)).slice(0, 32);
+  const now = new Date().toISOString();
+
+  await env.DB.prepare(
+    `INSERT INTO wish_signups (received_at, app, topic, email, email_norm, device, src, unsub_token, status)
+     VALUES (?,?,?,?,?,?,?,?,'active')
+     ON CONFLICT(app, topic, email_norm) DO UPDATE SET
+       status='active',
+       received_at=excluded.received_at,
+       device=COALESCE(excluded.device, wish_signups.device),
+       src=COALESCE(excluded.src, wish_signups.src)`
+  ).bind(now, app, topic, email, emailNorm, device, src, token).run();
+
+  return isJson ? new Response(null, { status: 204, headers: corsHeaders(req) }) : redirect(ret + "#thanks");
+}
+
+async function handleWishUnsubscribe(req: Request, env: Env): Promise<Response> {
+  const url = new URL(req.url);
+  const app = url.searchParams.get("app") ?? "";
+  const topic = url.searchParams.get("topic") ?? "";
+  const t = url.searchParams.get("t") ?? "";
+  if (!allowedApps(env).has(app) || !ALLOWED_TOPICS.has(topic) || !TOKEN_RE.test(t)) throw new HttpError(400, "リンクが不正です");
+  await env.DB.prepare("UPDATE wish_signups SET status='unsubscribed' WHERE app=? AND topic=? AND unsub_token=?")
+    .bind(app, topic, t).run();
+  return redirect(env.SITE_BASE + "/android/unsubscribed/");
+}
+
+function requireToken(req: Request, env: Env) {
+  if ((req.headers.get("Authorization") ?? "") !== `Bearer ${env.SUMMARY_TOKEN}`) throw new HttpError(401, "unauthorized");
+}
+
+async function handleWishSummary(req: Request, env: Env): Promise<Response> {
+  requireToken(req, env);
+  const url = new URL(req.url);
+  const app = url.searchParams.get("app") ?? "choka-log";
+  const topic = url.searchParams.get("topic") ?? "android";
+  const base = "FROM wish_signups WHERE app=? AND topic=? AND status='active'";
+  const [total, bySrc, byDevice, byWeek, invited] = await Promise.all([
+    env.DB.prepare(`SELECT COUNT(*) AS n ${base}`).bind(app, topic).first<{ n: number }>(),
+    env.DB.prepare(`SELECT src, COUNT(*) AS n ${base} GROUP BY src ORDER BY n DESC`).bind(app, topic).all(),
+    env.DB.prepare(`SELECT device, COUNT(*) AS n ${base} GROUP BY device ORDER BY n DESC`).bind(app, topic).all(),
+    env.DB.prepare(`SELECT strftime('%Y-W%W', received_at) AS week, COUNT(*) AS n ${base} GROUP BY week ORDER BY week`).bind(app, topic).all(),
+    env.DB.prepare(`SELECT COUNT(*) AS n ${base} AND invited_at IS NOT NULL`).bind(app, topic).first<{ n: number }>(),
+  ]);
+  return json(200, {
+    total_active: total?.n ?? 0,
+    by_src: bySrc.results, by_device: byDevice.results, by_week: byWeek.results,
+    invited: invited?.n ?? 0,
+  });
+}
+
+async function handleWishExport(req: Request, env: Env): Promise<Response> {
+  requireToken(req, env);
+  const url = new URL(req.url);
+  const app = url.searchParams.get("app") ?? "choka-log";
+  const topic = url.searchParams.get("topic") ?? "android";
+  const rows = await env.DB.prepare(
+    "SELECT received_at,email,device,src,status,invited_at,unsub_token FROM wish_signups WHERE app=? AND topic=? AND status='active' ORDER BY received_at"
+  ).bind(app, topic).all<Record<string, string | null>>();
+  const esc = (v: string | null) => `"${(v ?? "").replace(/"/g, '""')}"`;
+  const lines = ["received_at,email,device,src,status,invited_at,unsub_token",
+    ...rows.results.map(r => [r.received_at, r.email, r.device, r.src, r.status, r.invited_at, r.unsub_token].map(esc).join(","))];
+  return new Response("\uFEFF" + lines.join("\n"), {
+    status: 200,
+    headers: { "content-type": "text/csv; charset=utf-8", "content-disposition": `attachment; filename="wish-${app}-${topic}.csv"` },
+  });
+}
+
 export default {
   async fetch(req: Request, env: Env): Promise<Response> {
     const url = new URL(req.url);
@@ -508,6 +687,10 @@ export default {
       if (req.method === "POST" && url.pathname === "/feedback") return await handleFeedback(req, env);
       if (req.method === "POST" && url.pathname === "/poll") return await handlePoll(req, env);
       if (req.method === "GET" && url.pathname === "/poll/summary") return await handleSummary(req, env);
+      if (req.method === "POST" && url.pathname === "/wish") return await handleWish(req, env);
+      if (req.method === "GET" && url.pathname === "/wish/unsubscribe") return await handleWishUnsubscribe(req, env);
+      if (req.method === "GET" && url.pathname === "/wish/summary") return await handleWishSummary(req, env);
+      if (req.method === "GET" && url.pathname === "/wish/export") return await handleWishExport(req, env);
       if (req.method === "GET" && url.pathname === "/health") return json(200, { ok: true });
       return json(404, { message: "not found" });
     } catch (e) {
@@ -553,6 +736,12 @@ curl -s $API/poll/summary?app=ensemble-stage -H "Authorization: Bearer <SUMMARY_
 
 # 回数制限（6回目が 429 になること）
 for i in 1 2 3 4 5 6; do curl -s -o /dev/null -w "%{http_code}\n" -X POST $API/feedback -H 'content-type: application/json' -d '{"app":"choka-log","type":"other","message":""}'; done
+
+# wish 登録（204。同じメールをもう一度送っても upsert されるだけ）
+curl -s -i -X POST $API/wish -H 'content-type: application/json' -d '{"app":"choka-log","topic":"android","email":"test@example.com","device":"pixel","src":"site"}'
+
+# wish 集計（トークン必須）
+curl -s "$API/wish/summary?app=choka-log&topic=android" -H "Authorization: Bearer <SUMMARY_TOKEN>"
 ```
 
 ---
@@ -563,15 +752,17 @@ for i in 1 2 3 4 5 6; do curl -s -o /dev/null -w "%{http_code}\n" -X POST $API/f
 |---|---|
 | iOS アプリ（`FEEDBACK_ENDPOINT`） | `https://api.margheritaworks.com/feedback` |
 | サポートサイトの投票フォーム `action` | `https://api.margheritaworks.com/poll` |
-| 週次レポートのスクリプト | `https://api.margheritaworks.com/poll/summary` と `SUMMARY_TOKEN` |
+| 週次レポートのスクリプト | `https://api.margheritaworks.com/poll/summary`・`/wish/summary` と `SUMMARY_TOKEN` |
+| メール登録フォーム `action`（`/wish` を使うアプリのみ） | `https://api.margheritaworks.com/wish` |
 
 ---
 
 ## 8. 運用
 
-- 新アプリの追加：`wrangler.jsonc` の `ALLOWED_APPS`・`APP_LABELS`・`ALLOWED_RETURN_HOSTS` に追記して `npm run deploy`
-- 集計をすぐ見る：`npm run summary`
+- 新アプリの追加：`wrangler.jsonc` の `ALLOWED_APPS`・`APP_LABELS`・`ALLOWED_RETURN_HOSTS` に追記して `npm run deploy`（D1/KV/シークレットの変更は不要）
+- 集計をすぐ見る：`npm run summary`（feedback/poll）、`npm run wish:summary`（wish）
 - 自由記述の一覧：`npx wrangler d1 execute mw-feedback --remote --command "SELECT id,received_at,app,type,substr(message,1,60) FROM feedback ORDER BY id DESC LIMIT 50"`
+- wish 登録の一覧（CSV）：`GET /wish/export?app=&topic=`（`SUMMARY_TOKEN` 必須）
 - シークレットのローテーション：`npx wrangler secret put SUMMARY_TOKEN` で上書き
 
 ---
@@ -585,4 +776,7 @@ for i in 1 2 3 4 5 6; do curl -s -o /dev/null -w "%{http_code}\n" -X POST $API/f
 - [ ] `GET /poll/summary` がトークンなしで 401、ありで集計 JSON
 - [ ] `/feedback` を同一 IP から 1 時間に 6 回目で 429
 - [ ] KV と D1 に生の IP アドレスが保存されていない
-- [ ] `NOTIFY_TO`・`SUMMARY_TOKEN`・`IP_SALT` がリポジトリ内のファイルに存在しない
+- [ ] `NOTIFY_TO`・`SUMMARY_TOKEN`・`IP_SALT`・`UNSUB_SALT` がリポジトリ内のファイルに存在しない
+- [ ] `POST /wish`（JSON）で 204、同じメールを2回送っても `wish_signups` は1行のまま（`status='active'`に更新されるだけ）。通知メールは送られない
+- [ ] `GET /wish/unsubscribe?app=&topic=&t=` で該当行が `status='unsubscribed'` になる
+- [ ] `GET /wish/summary`・`GET /wish/export` がトークンなしで 401
