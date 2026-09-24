@@ -101,6 +101,8 @@ mw-feedback-worker/
 }
 ```
 
+**2026-09-24 追加：** Safari 拡張機能「どこでも倍速」（`anyspeed`、ハイフンなし）を `ALLOWED_APPS`/`APP_LABELS` に追加した。この拡張機能は `/wish` を使わないため `SITE_BASES` への追加は不要。
+
 シークレット（`wrangler secret put` で登録。ファイルに書かない）：
 
 | 名前 | 内容 |
@@ -122,7 +124,7 @@ CREATE TABLE IF NOT EXISTS feedback (
   message     TEXT NOT NULL,
   email       TEXT,
   diag_json   TEXT,
-  source      TEXT NOT NULL,           -- app | web
+  source      TEXT NOT NULL,           -- app | web | extension（2026-09-24追加）
   client_ts   TEXT
 );
 
@@ -167,8 +169,8 @@ CREATE INDEX IF NOT EXISTS idx_poll_app_q ON poll_answers(app, q);
 - `message`：文字列、2000 字以内。`type` が `other` 以外なら 1 字以上
 - `email`：省略可。あれば 254 字以内で `@` を含む簡易チェック
 - `poll`：省略可。あれば `q` と `answer` が英数字とハイフンのみ、各 64 字以内
-- `diag`：省略可。あれば JSON オブジェクト。2 KB 以内。**キーに `lat`,`lon`,`latitude`,`longitude`,`name`,`names`,`title`,`id`,`idfv`,`uuid` を含む場合は 400**（位置情報・個人名・識別子の混入防止）
-- `source`：`app | web`。省略時 `app`
+- `diag`：省略可。あれば JSON オブジェクト。2 KB 以内。**キーに `lat`,`lon`,`latitude`,`longitude`,`name`,`names`,`title`,`id`,`idfv`,`uuid`,`url`,`host`,`hostname`,`domain`,`site`,`href` を含む場合は 400**（位置情報・個人名・識別子・閲覧中サイト情報の混入防止。`url`/`host`/`hostname`/`domain`/`site`/`href` は2026-09-24、Safari拡張機能対応で追加）
+- `source`：`app | web | extension`。省略時・未知の値は `app`（`extension` は2026-09-24、Safari拡張機能対応で追加）
 
 処理：
 
@@ -269,6 +271,8 @@ KV に `rl:<endpoint>:<sha256(IP + IP_SALT)>` を TTL 付きで保存し、回�
 ### 3.6 CORS
 
 `Origin` が `https://*.margheritaworks.com` または `https://margheritaworks.com` のときだけ、`Access-Control-Allow-Origin` に同じ値を返す。`OPTIONS` は `204`。iOS アプリの `URLSession` は CORS の対象外なので影響しない。
+
+**2026-09-24 追加：** Safari 拡張機能（`safari-web-extension://<インストールごとのUUID>`）の設定ページからの `fetch` を通すため、`Origin` が `^safari-web-extension://[0-9A-Fa-f-]+$` に一致する場合も許可する。**ただし `/feedback` へのアクセスに限る**（`/poll/summary`・`/wish/summary`・`/wish/export` などの管理系エンドポイントには適用しない。`corsHeaders()` がリクエストのパスを見て判定する）。`chrome-extension://` など他ブラウザの拡張機能スキームは対象外。
 
 ---
 
