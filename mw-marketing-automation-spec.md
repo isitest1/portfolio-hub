@@ -167,7 +167,7 @@ mw-marketing/
       "tier": 1,
       "status": "live",
       "store_url": "https://apps.apple.com/jp/app/id6793795823",
-      "support_url": "https://ensemblestage.margheritaworks.com/",
+      "support_url": "https://ensemble-stage.margheritaworks.com/",
       "repo": "isitest1/<吹奏楽のリポジトリ名>",
       "audience": "学校の吹奏楽部の顧問・指導者、学生指揮者・部長、一般団体の運営",
       "value_prop": "配置図・座席表を iPad で作って PDF で配れる",
