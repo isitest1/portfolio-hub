@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS feedback (
   message     TEXT NOT NULL,
   email       TEXT,
   diag_json   TEXT,
-  source      TEXT NOT NULL,           -- app | web | extension（2026-09-24追加）
+  source      TEXT NOT NULL,           -- app | web | extension（2026-09-24追加） | android（2026-10-02追加）
   client_ts   TEXT
 );
 
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS poll_answers (
   app         TEXT NOT NULL,
   q           TEXT NOT NULL,           -- 質問ID 例: role-v1, chart-usage-v1, market-v1
   answer      TEXT NOT NULL,           -- 選択肢の内部値
-  source      TEXT NOT NULL            -- app | web
+  source      TEXT NOT NULL            -- app | web | extension | android（extension・android は2026-10-02追加）
 );
 
 CREATE INDEX IF NOT EXISTS idx_feedback_app_time ON feedback(app, received_at);
@@ -201,7 +201,7 @@ CREATE INDEX IF NOT EXISTS idx_wish_app_topic ON wish_signups(app, topic, status
 - `email`：省略可。あれば 254 字以内で `@` を含む簡易チェック
 - `poll`：省略可。あれば `q` と `answer` が英数字とハイフンのみ、各 64 字以内
 - `diag`：省略可。あれば JSON オブジェクト。2 KB 以内。**キーに `lat`,`lon`,`latitude`,`longitude`,`name`,`names`,`title`,`id`,`idfv`,`uuid`,`url`,`host`,`hostname`,`domain`,`site`,`href` を含む場合は 400**（位置情報・個人名・識別子・閲覧中サイト情報の混入防止。`url`/`host`/`hostname`/`domain`/`site`/`href` は2026-09-24、Safari拡張機能対応で追加）
-- `source`：`app | web | extension`。省略時・未知の値は `app`（`extension` は2026-09-24、Safari拡張機能対応で追加）
+- `source`：`app | web | extension | android`。省略時・未知の値は `app`（`extension` は2026-09-24、Safari拡張機能対応で追加。`android` は2026-10-02、Android版アプリ対応で追加）
 
 処理：
 
@@ -235,7 +235,7 @@ CREATE INDEX IF NOT EXISTS idx_wish_app_topic ON wish_signups(app, topic, status
 3. `poll_answers` に `source='web'` で 1 行挿入
 4. `303 See Other` + `Location: <return>`
 
-JSON で来た場合は `204` を返す。
+JSON で来た場合は `204` を返す。このとき `source` は `/feedback`（3.1）と同じ規則で、`web | extension | android` はそのまま、省略時・未知の値は `app` として挿入する（2026-10-02、`extension`・`android` を追加。それ以前は `web` 以外すべて `app`）。フォーム送信は常に `source='web'`。
 
 サポートサイト側の HTML 例：
 
