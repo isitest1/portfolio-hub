@@ -214,7 +214,7 @@ export const projects: Project[] = [
     ],
     appStoreUrl: 'https://apps.apple.com/jp/app/id6797323735',
     supportUrl: 'https://netagicho.margheritaworks.com/',
-    screenshots: ['/projects/futomemo-1.png'],
+    screenshots: ['/projects/netagicho-1.png'],
   },
   {
     id: 'photoslim',
@@ -359,10 +359,23 @@ export const projects: Project[] = [
     // 実機/App Store提出用のスクリーンショット素材が見つかっていません
   },
   {
+    id: 'imatsure',
+    name: { ja: '今釣れ（いまつれ）', en: 'Imatsure' },
+    category: 'Web',
+    featured: true,
+    status: 'active',
+    platforms: ['Web'],
+    description: {
+      ja: '相模湾と東京湾の船宿が毎日出す釣果を集めて、魚種ごとに「上向き」「下向き」がひと目でわかる Web サイト。',
+      en: 'Pulls together the daily catch reports from charter boats on Sagami Bay and Tokyo Bay, so you can see at a glance which fish are on the rise and which are tapering off.',
+    },
+    websiteUrl: 'https://imatsure.com/',
+    screenshots: ['/projects/imatsure-1.png'],
+  },
+  {
     id: 'xcode-sentinel',
     name: { ja: 'XcodeSentinel', en: 'XcodeSentinel' },
     category: 'Tool',
-    featured: true,
     status: 'active',
     technologies: ['Swift', 'SwiftUI', 'AppKit', 'Accessibility API'],
     platforms: ['Mac'],
