@@ -373,6 +373,31 @@ export const projects: Project[] = [
     screenshots: ['/projects/imatsure-1.png'],
   },
   {
+    id: 'umaredoshi',
+    name: { ja: '生まれ年ガチャ', en: 'Born in three eras' },
+    category: 'Web',
+    featured: true,
+    status: 'active',
+    platforms: ['Web'],
+    hasDetailPage: true,
+    description: {
+      ja: '同じ「私」が、江戸から平成までの3つの時代に同時に生まれたら。進学も結婚も寿命も、日本の実際の統計で決まるブラウザの人生ゲーム。',
+      en: 'One person, born three times — into three different eras between Edo and Heisei. A browser life sim where schooling, marriage and lifespan all follow Japan’s real statistics.',
+    },
+    longDescription: {
+      ja: '性格も才能も家の暮らし向きも同じ。違うのは、生まれた年と生まれた県だけ。ガチャで決まった3つの時代の「私」に、あなたの決断が同時に当てはまります。けれど、それが叶うかどうかを決めるのは時代です。人口動態統計・生命表・学校基本調査・賃金や年金の資料など政府の統計をもとに、一生を最後まで見届けます。登録不要・無料で遊べます。',
+      en: 'Same personality, same talents, same family circumstances — only the birth year and prefecture differ. A gacha picks three eras, and every choice you make applies to all three versions of you at once. Whether it works out is up to the era. Lives play out on government data — vital statistics, life tables, school surveys, wage and pension records — from birth to the very end. Free, no sign-up.',
+    },
+    features: [
+      { ja: 'ガチャで3人の生まれ年・県・性別・家の暮らし向きが決まる', en: 'A gacha decides each life’s birth year, prefecture, sex and household circumstances' },
+      { ja: '進学・上京・結婚・働き方・年金など21の決断を3人に同時に当てはめる', en: '21 life decisions — school, moving to the city, marriage, work, pensions — applied to all three at once' },
+      { ja: '時代ごとの暮らしの場面と、その人の「心の声」が毎年出てくる', en: 'Everyday scenes from each era, plus what that person was thinking, year by year' },
+      { ja: '最後に享年・生涯年収・年金・叶わなかった望みを3人で見比べる', en: 'A final side-by-side of age at death, lifetime earnings, pension and unfulfilled wishes' },
+    ],
+    websiteUrl: 'https://umaredoshi.margheritaworks.com/',
+    screenshots: ['/projects/umaredoshi-1.png'],
+  },
+  {
     id: 'xcode-sentinel',
     name: { ja: 'XcodeSentinel', en: 'XcodeSentinel' },
     category: 'Tool',
