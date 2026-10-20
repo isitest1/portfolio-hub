@@ -140,8 +140,7 @@ export const projects: Project[] = [
       { ja: '場所と時間で自動オフ', en: 'Auto-off by place and time' },
     ],
     appStoreUrl: 'https://apps.apple.com/jp/app/id6824204565',
-    websiteUrl: 'https://lifelog.margheritaworks.com/',
-    supportUrl: 'https://lifelog.margheritaworks.com/support/',
+    supportUrl: 'https://lifelog.margheritaworks.com/',
     screenshots: ['/projects/lifelog-1.png'],
   },
   {
