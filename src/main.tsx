@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import App from './App';
 import './styles/global.css';
 
@@ -12,8 +12,16 @@ if (window.location.pathname.length > 1 && window.location.pathname.endsWith('/'
   );
 }
 
-createRoot(document.getElementById('root')!).render(
+const root = document.getElementById('root')!;
+const app = (
   <StrictMode>
     <App />
   </StrictMode>
 );
+
+// 書き出し済みのページ（/ja, /en, /ja/projects/x …）は本文を引き継ぐ。404.html などの空のページは描画から行う
+if (root.hasChildNodes()) {
+  hydrateRoot(root, app);
+} else {
+  createRoot(root).render(app);
+}

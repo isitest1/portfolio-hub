@@ -3,7 +3,9 @@ import { useEffect } from 'react';
 /** public/ 配下の絶対パスや相対パスから、GitHub Pages の base を含む絶対URLを作る */
 export function absoluteUrl(pathname: string): string {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-  return window.location.origin + base + (pathname.startsWith('/') ? pathname : '/' + pathname);
+  // ビルド時の書き出し（window が無い）では本番の住所を使う
+  const origin = typeof window === 'undefined' ? 'https://margheritaworks.com' : window.location.origin;
+  return origin + base + (pathname.startsWith('/') ? pathname : '/' + pathname);
 }
 
 const setMeta = (attr: 'name' | 'property', key: string, content: string) => {
