@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, type ReactNode } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import type { Lang } from '../types';
 import { ui, type UI } from './translations';
 
@@ -18,7 +18,6 @@ export const detectLang = (): Lang => {
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const { lang: param } = useParams();
   const lang: Lang = param === 'en' ? 'en' : 'ja';
-  const navigate = useNavigate();
   const location = useLocation();
   const t = ui[lang];
 
@@ -61,15 +60,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     () => ({
       lang,
       t,
-      // 同じページのまま言語だけ差し替える
+      // 選んだ言語を保存する（移動は LanguageSwitcher のリンクが行う）
       setLang: (next: Lang) => {
         localStorage.setItem(STORAGE_KEY, next);
-        const rest = location.pathname.replace(/^\/(ja|en)/, '');
-        navigate('/' + next + rest, { replace: true });
       },
       path: (p = '') => '/' + lang + (p ? '/' + p.replace(/^\//, '') : ''),
     }),
-    [lang, t, location.pathname, navigate]
+    [lang, t]
   );
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;

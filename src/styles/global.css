@@ -59,9 +59,9 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; white-space: nowrap;
   padding: 6px 11px; border: 1px solid transparent; transition: background 0.18s ease, color 0.18s ease;
 }
-.lang__btn[aria-pressed='true'] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.lang__btn[aria-pressed='false'] { color: var(--ink-3); }
-.lang__btn[aria-pressed='false']:hover { color: var(--ink); }
+.lang__btn[aria-current='page'] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.lang__btn:not([aria-current]) { color: var(--ink-3); }
+.lang__btn:not([aria-current]):hover { color: var(--ink); }
 
 /* Hero */
 .hero { padding: clamp(36px, 6vw, 60px) var(--pad) 44px; border-bottom: 1px solid var(--rule); }
