@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url';
 import { projects } from '../src/data/projects';
 import { languages, ui } from '../src/i18n/translations';
 import type { Lang } from '../src/types';
+// vite build --ssr src/entry-server.tsx --outDir dist-ssr の出力（package.json の build を参照）
+import { render } from '../dist-ssr/entry-server.js';
 
 /**
  * GitHub Pages は静的ホストで、SPAの直接URL（/ja, /ja/projects/xxx など）に
@@ -15,6 +17,10 @@ import type { Lang } from '../src/types';
  * dist/ 以下に生成する。ファイル名は「GitHub Pagesが末尾スラッシュへの301
  * リダイレクトを発生させない」ように、ディレクトリ+index.htmlではなく
  * 拡張子なしURLに対応する *.html ファイル（例: /ja -> dist/ja.html）にする。
+ *
+ * head（title / description / canonical / hreflang / OGP）に加えて、本文も
+ * entry-server.tsx の render()（renderToString + StaticRouter）で書き出し、
+ * <div id="root"> に埋め込む。ブラウザ側は main.tsx の hydrateRoot で引き継ぐ。
  */
 
 const SITE_URL = 'https://margheritaworks.com';
@@ -85,6 +91,9 @@ for (const r of routes) {
     `<link rel="alternate" hreflang="x-default" href="${altUrl(r.urlPath, 'ja')}" />`,
   ].join('\n    ');
   html = html.replace('</head>', `    ${headExtra}\n  </head>`);
+  // 置換文字列の $ を特別扱いさせないため、関数で渡す
+  const body: string = render(r.urlPath);
+  html = html.replace('<div id="root"></div>', () => `<div id="root">${body}</div>`);
 
   const outPath = path.join(distDir, r.filePath);
   mkdirSync(path.dirname(outPath), { recursive: true });
