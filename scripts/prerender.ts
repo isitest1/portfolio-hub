@@ -91,4 +91,37 @@ for (const r of routes) {
   writeFileSync(outPath, html);
 }
 
-console.log(`prerender: ${routes.length} pages written`);
+// 404.html: 一覧に無い住所（/ja/ など）でも SPA をそのまま描画する（HTTP は 404 のまま）。
+// 以前の「?/path に退避して index.html に戻す」方式は、index.html を「/」の転送ページにしたため使わない。
+const notFoundHtml = template.replace(
+  '</head>',
+  '    <meta name="robots" content="noindex" />\n  </head>'
+);
+writeFileSync(path.join(distDir, '404.html'), notFoundHtml);
+
+// index.html（「/」）: /ja へ転送するだけのページ。GitHub Pages はサーバー側の 301 を設定できないため、
+// 即時の meta refresh（Google は恒久的な転送として扱う）と canonical で /ja を正とする。
+// 言語の自動判定はしない（Googlebot が英語環境のため「/」が英語版として登録されていた）。
+const verification = template.match(/<meta name="google-site-verification"[^>]*>/)?.[0] ?? '';
+const redirectHtml = `<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>${escapeHtml(ui.ja.meta.title)}</title>
+    <meta name="description" content="${escapeHtml(ui.ja.meta.description)}" />
+    ${verification}
+    <link rel="canonical" href="${SITE_URL}/ja" />
+    <link rel="alternate" hreflang="ja" href="${SITE_URL}/ja" />
+    <link rel="alternate" hreflang="en" href="${SITE_URL}/en" />
+    <link rel="alternate" hreflang="x-default" href="${SITE_URL}/ja" />
+    <meta http-equiv="refresh" content="0; url=/ja" />
+    <script>location.replace('/ja' + location.search + location.hash);</script>
+  </head>
+  <body>
+    <p><a href="/ja">Margherita Works</a></p>
+  </body>
+</html>
+`;
+writeFileSync(path.join(distDir, 'index.html'), redirectHtml);
+
+console.log(`prerender: ${routes.length} pages + 404.html + index.html (→ /ja) written`);

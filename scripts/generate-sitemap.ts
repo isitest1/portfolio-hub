@@ -6,6 +6,9 @@ import { languages } from '../src/i18n/translations';
 
 const SITE_URL = 'https://margheritaworks.com';
 
+// lastmod はビルド日（UTC）
+const lastmod = new Date().toISOString().slice(0, 10);
+
 const urls: string[] = [];
 for (const lang of languages) {
   urls.push(`${SITE_URL}/${lang}`);
@@ -16,7 +19,7 @@ for (const lang of languages) {
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((u) => `  <url><loc>${u}</loc></url>`).join('\n')}
+${urls.map((u) => `  <url><loc>${u}</loc><lastmod>${lastmod}</lastmod></url>`).join('\n')}
 </urlset>
 `;
 
