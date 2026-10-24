@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom';
 import { featuredProjects } from '../data/projects';
 import { useLang } from '../i18n/LanguageProvider';
 import ProjectLinks from './ProjectLinks';
 import Shot from './Shot';
 
 export default function Featured() {
-  const { lang, t } = useLang();
+  const { lang, t, path } = useLang();
   const items = featuredProjects();
   if (items.length === 0) return null;
 
@@ -19,7 +20,9 @@ export default function Featured() {
             <Shot project={p} lang={lang} alt={p.name[lang]} height={300} />
             <div className="fcard__body">
               <span className="fcard__cat">{p.category}</span>
-              <h3 className="fcard__name">{p.name[lang]}</h3>
+              <h3 className="fcard__name">
+                {p.hasDetailPage ? <Link to={path('projects/' + p.id)}>{p.name[lang]}</Link> : p.name[lang]}
+              </h3>
               <p className="fcard__desc">{p.description[lang]}</p>
               <ProjectLinks project={p} primaryOnly />
             </div>

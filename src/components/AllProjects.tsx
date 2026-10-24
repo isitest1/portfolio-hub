@@ -1,9 +1,10 @@
+import { Link } from 'react-router-dom';
 import { groupOf, groupOrder, projects } from '../data/projects';
 import { useLang } from '../i18n/LanguageProvider';
 import ProjectLinks from './ProjectLinks';
 
 export default function AllProjects() {
-  const { lang, t } = useLang();
+  const { lang, t, path } = useLang();
   return (
     <section className="section" id="products" aria-labelledby="all-heading">
       <h2 id="all-heading" className="eyebrow">
@@ -20,7 +21,13 @@ export default function AllProjects() {
                 {items.map((p) => (
                   <li key={p.id} className="row">
                     <div className="row__top">
-                      <span className="row__name">{p.name[lang]}</span>
+                      {p.hasDetailPage ? (
+                        <Link to={path('projects/' + p.id)} className="row__name">
+                          {p.name[lang]}
+                        </Link>
+                      ) : (
+                        <span className="row__name">{p.name[lang]}</span>
+                      )}
                       <span className="row__status">{t.status[p.status ?? 'active']}</span>
                     </div>
                     <p className="row__desc">{p.description[lang]}</p>
