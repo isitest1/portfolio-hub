@@ -48,7 +48,7 @@ export const ui: Record<Lang, UI> = {
     },
     sections: { featured: '主なプロダクト', all: 'すべてのプロダクト', about: 'About' },
     about:
-      '買い物の途中、船の上、合奏の前、名前が出てこない会食の席。暮らしや趣味のなかで「これがあれば」と思った場面を起点に、iPhoneアプリとツールをつくっています。',
+      '買い物の途中、船の上、合奏の前、名前が出てこない会食の席。暮らしや趣味のなかで「これがあれば」と思った場面を起点に、iPhoneアプリやWebアプリ、ツールをつくっています。',
     meta_count: (n: number) => 'プロダクト ' + n + ' 件',
     updated: '最終更新 2026.10',
     links: {
@@ -87,7 +87,7 @@ export const ui: Record<Lang, UI> = {
     },
     sections: { featured: 'Featured', all: 'All products', about: 'About' },
     about:
-      'Halfway down the grocery aisle. Out on the boat. Setting up before band rehearsal. At dinner, when a name won’t come. Each app here starts from a real moment in everyday life — or in a hobby — where something was missing.',
+      'Halfway down the grocery aisle. Out on the boat. Setting up before band rehearsal. At dinner, when a name won’t come. Every iPhone app, web app and tool here starts from a real moment in everyday life — or in a hobby — where something was missing.',
     meta_count: (n: number) => n + ' products',
     updated: 'Updated 2026.10',
     links: {
