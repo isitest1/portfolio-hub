@@ -48,7 +48,7 @@ export const ui: Record<Lang, UI> = {
     },
     sections: { featured: '主なプロダクト', all: 'すべてのプロダクト', about: 'About' },
     about:
-      '迷わず使えて、開いた瞬間に用が済む。そう言い切れるものだけを世に出しています。',
+      '買い物の途中、船の上、合奏の前、名前が出てこない会食の席。暮らしや趣味のなかで「これがあれば」と思った場面を起点に、iPhoneアプリとツールをつくっています。',
     meta_count: (n: number) => 'プロダクト ' + n + ' 件',
     updated: '最終更新 2026.11',
     links: {
@@ -87,7 +87,7 @@ export const ui: Record<Lang, UI> = {
     },
     sections: { featured: 'Featured', all: 'All products', about: 'About' },
     about:
-      'Obvious at a glance. Done the moment you open it. If it can’t be both, it doesn’t ship.',
+      'Halfway down the grocery aisle. Out on the boat. Setting up before band rehearsal. At dinner, when a name won’t come. Each app here starts from a real moment in everyday life — or in a hobby — where something was missing.',
     meta_count: (n: number) => n + ' products',
     updated: 'Updated 2026.11',
     links: {
