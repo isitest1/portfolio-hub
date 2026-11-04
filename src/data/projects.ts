@@ -144,30 +144,6 @@ export const projects: Project[] = [
     screenshots: ['/projects/lifelog-1.png'],
   },
   {
-    id: 'furusato-cospa',
-    name: { ja: 'ふるさとコスパ', en: 'Furusato Cospa' },
-    category: 'Web',
-    status: 'active',
-    technologies: ['TypeScript', 'Cloudflare Workers', 'Supabase'],
-    platforms: ['Web', 'Chrome'],
-    hasDetailPage: true,
-    description: {
-      ja: '楽天ふるさと納税の返礼品を単価・還元率で比較し、コスパの良い寄付先をひと目で見つけるツール。',
-      en: 'Compares Rakuten hometown-tax gifts by unit price and reward rate, so the best-value donation stands out at a glance.',
-    },
-    longDescription: {
-      ja: '似たような返礼品が並んでいても、量や還元率はまちまちです。このツールはそれらを揃えて比較できるようにし、Webアプリと Chrome 拡張機能の両方から使えます。',
-      en: 'Similar-looking gifts often differ a lot in quantity and reward rate. This tool normalizes them for a fair comparison, available both as a web app and as a Chrome extension.',
-    },
-    features: [
-      { ja: '単価・還元率で自動比較', en: 'Automatic comparison by unit price and reward rate' },
-      { ja: 'Webアプリと Chrome 拡張機能で利用可能', en: 'Available as both a web app and a Chrome extension' },
-    ],
-    websiteUrl: 'https://furusato-cospa.kouhei1.workers.dev/',
-    chromeWebStoreUrl: 'https://chromewebstore.google.com/detail/mopedkejokejahoekdkfgccgiaicipld',
-    screenshots: ['/projects/furusato-cospa-1.png'],
-  },
-  {
     id: 'textsnap',
     name: { ja: 'TextSnap', en: 'TextSnap' },
     category: 'Tool',
@@ -290,20 +266,6 @@ export const projects: Project[] = [
     screenshots: ['/projects/namecue-1.png'],
   },
   {
-    id: 'record-quick',
-    name: { ja: 'RecordQuick', en: 'RecordQuick' },
-    category: 'iOS',
-    status: 'coming-soon',
-    technologies: ['Swift', 'SwiftUI'],
-    platforms: ['iPhone', 'iPad'],
-    description: {
-      ja: 'ワンタップで録音を開始でき、バックグラウンドでも止まらない録音アプリ。最大30言語の文字起こしに対応。',
-      en: 'Start recording in one tap and keep going in the background, with speech-to-text in roughly 30 languages.',
-    },
-    supportUrl: 'https://record-quick.margheritaworks.com/',
-    // 実機/App Store提出用のスクリーンショット素材が見つかっていません
-  },
-  {
     id: 'rig-sketch',
     name: { ja: 'RigSketch', en: 'RigSketch' },
     category: 'iOS',
@@ -386,45 +348,6 @@ export const projects: Project[] = [
     // 実機/App Store提出用のスクリーンショット素材が見つかっていません
   },
   {
-    id: 'imatsure',
-    name: { ja: '今釣れ（いまつれ）', en: 'Imatsure' },
-    category: 'Web',
-    featured: true,
-    status: 'active',
-    platforms: ['Web'],
-    description: {
-      ja: '相模湾と東京湾の船宿が毎日出す釣果を集めて、魚種ごとに「上向き」「下向き」がひと目でわかる Web サイト。',
-      en: 'Pulls together the daily catch reports from charter boats on Sagami Bay and Tokyo Bay, so you can see at a glance which fish are on the rise and which are tapering off.',
-    },
-    websiteUrl: 'https://imatsure.com/',
-    screenshots: ['/projects/imatsure-1.png'],
-  },
-  {
-    id: 'umaredoshi',
-    name: { ja: '生まれ年ガチャ', en: 'Born in three eras' },
-    category: 'Web',
-    featured: true,
-    status: 'active',
-    platforms: ['Web'],
-    hasDetailPage: true,
-    description: {
-      ja: '同じ「私」が、江戸から平成までの3つの時代に同時に生まれたら。進学も結婚も寿命も、日本の実際の統計で決まるブラウザの人生ゲーム。',
-      en: 'One person, born three times — into three different eras between Edo and Heisei. A browser life sim where schooling, marriage and lifespan all follow Japan’s real statistics.',
-    },
-    longDescription: {
-      ja: '性格も才能も家の暮らし向きも同じ。違うのは、生まれた年と生まれた県だけ。ガチャで決まった3つの時代の「私」に、あなたの決断が同時に当てはまります。けれど、それが叶うかどうかを決めるのは時代です。人口動態統計・生命表・学校基本調査・賃金や年金の資料など政府の統計をもとに、一生を最後まで見届けます。登録不要・無料で遊べます。',
-      en: 'Same personality, same talents, same family circumstances — only the birth year and prefecture differ. A gacha picks three eras, and every choice you make applies to all three versions of you at once. Whether it works out is up to the era. Lives play out on government data — vital statistics, life tables, school surveys, wage and pension records — from birth to the very end. Free, no sign-up.',
-    },
-    features: [
-      { ja: 'ガチャで3人の生まれ年・県・性別・家の暮らし向きが決まる', en: 'A gacha decides each life’s birth year, prefecture, sex and household circumstances' },
-      { ja: '進学・上京・結婚・働き方・年金など21の決断を3人に同時に当てはめる', en: '21 life decisions — school, moving to the city, marriage, work, pensions — applied to all three at once' },
-      { ja: '時代ごとの暮らしの場面と、その人の「心の声」が毎年出てくる', en: 'Everyday scenes from each era, plus what that person was thinking, year by year' },
-      { ja: '最後に享年・生涯年収・年金・叶わなかった望みを3人で見比べる', en: 'A final side-by-side of age at death, lifetime earnings, pension and unfulfilled wishes' },
-    ],
-    websiteUrl: 'https://umaredoshi.margheritaworks.com/',
-    screenshots: ['/projects/umaredoshi-1.png'],
-  },
-  {
     id: 'xcode-sentinel',
     name: { ja: 'XcodeSentinel', en: 'XcodeSentinel' },
     category: 'Tool',
@@ -483,20 +406,6 @@ export const projects: Project[] = [
     websiteUrl: 'https://isitest1.github.io/text-compare/',
     githubUrl: 'https://github.com/isitest1/text-compare',
     screenshots: ['/projects/text-compare-1.png'],
-  },
-  {
-    id: 'portfolio-hub',
-    name: { ja: 'Margherita Works', en: 'Margherita Works' },
-    category: 'Website',
-    status: 'active',
-    technologies: ['React', 'TypeScript', 'Vite', 'GitHub Pages'],
-    platforms: ['Web'],
-    description: {
-      ja: 'このサイト。プロダクトとサポートページへの入口をまとめています。',
-      en: 'This site — the entry point to every product and its support page.',
-    },
-    githubUrl: 'https://github.com/isitest1/portfolio-hub',
-    screenshots: ['/projects/portfolio-hub-1.png'],
   },
 ];
 
