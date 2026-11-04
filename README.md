@@ -58,5 +58,5 @@ public/         favicon, robots.txt, 404.html(SPA fallback)
 ## TODO
 
 - 各アプリが実際に App Store で公開されたら `appStoreUrl` を追加する
-- `public/projects/` に残りのアプリのスクリーンショットを追加（RigSketch, NameCue, UnitPriceScanner, WorkoutQuest, tube-player-for-safari, web-monitor-rss, text-compare）
+- `public/projects/` に残りのアプリのスクリーンショットを追加（RigSketch, NameCue, UnitPriceScanner, WorkoutQuest, web-monitor-rss, text-compare）
 - OG 画像（`public/og.png`）と `index.html` の `og:image`

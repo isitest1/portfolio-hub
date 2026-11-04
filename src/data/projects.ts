@@ -279,18 +279,29 @@ export const projects: Project[] = [
     // 実機/App Store提出用のスクリーンショット素材が見つかっていません
   },
   {
-    id: 'tube-player-for-safari',
-    name: { ja: 'Tube Player for Safari', en: 'Tube Player for Safari' },
-    category: 'Tool',
-    status: 'coming-soon',
-    technologies: ['Swift', 'JavaScript'],
-    platforms: ['iPhone', 'iPad', 'Mac'],
+    id: 'simpletube',
+    name: { ja: 'SimpleTube', en: 'SimpleTube' },
+    category: 'iOS',
+    status: 'active',
+    technologies: ['Swift', 'JavaScript', 'Safari Extension'],
+    platforms: ['iPhone', 'iPad'],
+    hasDetailPage: true,
     description: {
-      ja: 'SafariのYouTube再生をネイティブのHTML5プレーヤーに置き換える機能拡張。AirPlayやPinP、通信・解析なしに対応。',
-      en: 'A Safari Web Extension that swaps YouTube’s player for native HTML5 — AirPlay and Picture-in-Picture, zero network calls.',
+      ja: 'Safariで見る動画を、どのサイトでも決めておいた速度で再生できるようにする機能拡張。',
+      en: 'A Safari extension that plays videos on any site at the speed you choose.',
     },
+    longDescription: {
+      ja: '速度を一度決めておけば、どの動画サイトを開いてもその速度で再生が始まります。サイトごとに倍速の設定を探したり、倍速ボタンがないサイトで困ったりすることがなくなります。自動で早送りできる広告は何もしなくても早送りし、自動で飛ばせない広告は15秒・30秒のスキップボタンで飛ばせます。講義やドラマ、アニメ、配信のアーカイブなど、長い動画ほど時間を節約できます。',
+      en: 'Set your preferred speed once, and every video site you open starts playing at that speed — no more hunting for a speed menu on each site, or finding out there isn’t one. Ads that can be fast-forwarded are sped through automatically, and 15- and 30-second skip buttons handle the ones that can’t. The longer the video — lectures, dramas, anime, stream archives — the more time you get back.',
+    },
+    features: [
+      { ja: 'どのサイトの動画も、決めておいた速度で再生', en: 'Plays videos on any website at your chosen speed' },
+      { ja: '自動で早送りできる広告は、何もしなくても早送り', en: 'Fast-forwards ads automatically whenever it can' },
+      { ja: '自動で飛ばせない広告は、15秒・30秒のスキップボタンで手動で飛ばせる', en: '15- and 30-second skip buttons for ads that can’t be skipped automatically' },
+    ],
+    appStoreUrl: 'https://apps.apple.com/jp/app/id6802875855',
     supportUrl: 'https://anyspeed.margheritaworks.com/',
-    screenshots: ['/projects/tube-player-1.png'],
+    screenshots: ['/projects/simpletube-ja-1.png'],
   },
   {
     id: 'copy-all-text',
