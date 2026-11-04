@@ -48,9 +48,9 @@ export const ui: Record<Lang, UI> = {
     },
     sections: { featured: '主なプロダクト', all: 'すべてのプロダクト', about: 'About' },
     about:
-      'ひとりで企画・設計・実装まで行っています。使う人が迷わないこと、開いてすぐ用が済むことを基準にプロダクトを選んでいます。',
+      '考えるのも、つくるのも、ひとり。迷わず使えて、開いた瞬間に用が済む。そう言い切れるものだけを世に出しています。',
     meta_count: (n: number) => 'プロダクト ' + n + ' 件',
-    updated: '最終更新 2026.10',
+    updated: '最終更新 2026.11',
     links: {
       appStore: 'App Store',
       chromeWebStore: 'Chrome ウェブストア',
@@ -87,9 +87,9 @@ export const ui: Record<Lang, UI> = {
     },
     sections: { featured: 'Featured', all: 'All products', about: 'About' },
     about:
-      'I design and build everything myself. A product ships when it is obvious to use and finishes the job the moment you open it.',
+      'One person, from first sketch to shipped code. If it isn’t obvious at a glance and done the moment you open it, it doesn’t ship.',
     meta_count: (n: number) => n + ' products',
-    updated: 'Updated 2026.10',
+    updated: 'Updated 2026.11',
     links: {
       appStore: 'App Store',
       chromeWebStore: 'Chrome Web Store',
