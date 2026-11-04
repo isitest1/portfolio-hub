@@ -39,18 +39,18 @@ export const ui: Record<Lang, UI> = {
     meta: {
       title: 'Margherita Works — つくったアプリと、その使いどころ',
       description:
-        'iPhoneアプリと、Macアプリやブラウザ拡張機能などの小さなツールをつくっています。それぞれのプロダクトが何をするもので、どこから使えるのかをまとめた場所です。',
+        'iPhoneアプリ、Webアプリ、小さなツールをつくっています。それぞれのプロダクトが何をするもので、どこから使えるのかをまとめた場所です。',
     },
     nav: { products: 'プロダクト', about: 'About', contact: 'Contact' },
     hero: {
-      headline: 'APPS\n& TOOLS.',
-      body: 'iPhoneアプリと、Macアプリやブラウザ拡張機能のような、道具として使える小さなツールをつくっています。ここは、それぞれのプロダクトが何をするもので、どこから使えるのかをまとめた場所です。',
+      headline: 'APPS,\nWEBSITES\n& TOOLS.',
+      body: 'iPhoneアプリ、Webアプリ、道具のような小さなツールをつくっています。ここは、それぞれのプロダクトが何をするもので、どこから使えるのかをまとめた場所です。',
     },
     sections: { featured: '主なプロダクト', all: 'すべてのプロダクト', about: 'About' },
     about:
       '買い物の途中、船の上、合奏の前、名前が出てこない会食の席。暮らしや趣味のなかで「これがあれば」と思った場面を起点に、iPhoneアプリとツールをつくっています。',
     meta_count: (n: number) => 'プロダクト ' + n + ' 件',
-    updated: '最終更新 2026.11',
+    updated: '最終更新 2026.10',
     links: {
       appStore: 'App Store',
       chromeWebStore: 'Chrome ウェブストア',
@@ -76,20 +76,20 @@ export const ui: Record<Lang, UI> = {
   },
   en: {
     meta: {
-      title: 'Margherita Works — Apps & Tools',
+      title: 'Margherita Works — Apps, Websites & Tools',
       description:
-        'iPhone apps, plus small Mac and browser-extension utilities I build. What each product does, and where to start using it.',
+        'iPhone apps, web apps and small utilities I build. What each product does, and where to start using it.',
     },
     nav: { products: 'Products', about: 'About', contact: 'Contact' },
     hero: {
-      headline: 'APPS\n& TOOLS.',
-      body: 'I build iPhone apps, along with small tool-like utilities for the Mac and the browser. This is where each product lives: what it does, and where you can start using it.',
+      headline: 'APPS,\nWEBSITES\n& TOOLS.',
+      body: 'I build iPhone apps, web apps and small tool-like utilities. This is where each product lives: what it does, and where you can start using it.',
     },
     sections: { featured: 'Featured', all: 'All products', about: 'About' },
     about:
       'Halfway down the grocery aisle. Out on the boat. Setting up before band rehearsal. At dinner, when a name won’t come. Each app here starts from a real moment in everyday life — or in a hobby — where something was missing.',
     meta_count: (n: number) => n + ' products',
-    updated: 'Updated 2026.11',
+    updated: 'Updated 2026.10',
     links: {
       appStore: 'App Store',
       chromeWebStore: 'Chrome Web Store',

@@ -1,6 +1,6 @@
 # Margherita Works
 
-個人開発のiPhoneアプリとツールをまとめるポートフォリオサイト。公開URL: https://margheritaworks.com/ 。デザイン方向は "Grid Poster"（大きなグロテスク見出し + カテゴリ別の列グリッド）。
+個人開発のiPhoneアプリ・Webアプリ・ツールをまとめるポートフォリオサイト。公開URL: https://margheritaworks.com/ 。デザイン方向は "Grid Poster"（大きなグロテスク見出し + カテゴリ3列グリッド）。
 
 - React 18 + TypeScript + Vite
 - 日本語 / 英語（`/ja/`, `/en/`）
@@ -58,5 +58,5 @@ public/         favicon, robots.txt, 404.html(SPA fallback)
 ## TODO
 
 - 各アプリが実際に App Store で公開されたら `appStoreUrl` を追加する
-- `public/projects/` に残りのアプリのスクリーンショットを追加（RigSketch, NameCue, UnitPriceScanner, WorkoutQuest, web-monitor-rss, text-compare）
+- `public/projects/` に残りのアプリのスクリーンショットを追加（RigSketch, NameCue, UnitPriceScanner, WorkoutQuest, tube-player-for-safari, web-monitor-rss, text-compare）
 - OG 画像（`public/og.png`）と `index.html` の `og:image`
