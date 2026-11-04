@@ -48,7 +48,7 @@ export const ui: Record<Lang, UI> = {
     },
     sections: { featured: '主なプロダクト', all: 'すべてのプロダクト', about: 'About' },
     about:
-      '考えるのも、つくるのも、ひとり。迷わず使えて、開いた瞬間に用が済む。そう言い切れるものだけを世に出しています。',
+      '迷わず使えて、開いた瞬間に用が済む。そう言い切れるものだけを世に出しています。',
     meta_count: (n: number) => 'プロダクト ' + n + ' 件',
     updated: '最終更新 2026.11',
     links: {
@@ -87,7 +87,7 @@ export const ui: Record<Lang, UI> = {
     },
     sections: { featured: 'Featured', all: 'All products', about: 'About' },
     about:
-      'One person, from first sketch to shipped code. If it isn’t obvious at a glance and done the moment you open it, it doesn’t ship.',
+      'Obvious at a glance. Done the moment you open it. If it can’t be both, it doesn’t ship.',
     meta_count: (n: number) => n + ' products',
     updated: 'Updated 2026.11',
     links: {
